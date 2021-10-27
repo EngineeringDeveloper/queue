@@ -7,12 +7,17 @@ GUI Application for task and Job planning with priority consideration
 
 </div>
 
-Written in JavaScript with an Electron front end & a back end in Rust using WebAssembly
+Written in JavaScript with an React end & a back end in Rust via Tauri
 
 ## References:  
+https://github.com/todotxt/todo.txt  
+https://dev.to/krofax/creating-desktop-apps-with-reactjs-using-tauri-af  
+  
+### Old
 https://blog.logrocket.com/supercharge-your-electron-apps-with-rust/  
 https://github.com/ransome1/sleek  
 https://bit.dev/  
+
 
 ## Starting Development
 
