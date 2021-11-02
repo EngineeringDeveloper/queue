@@ -1,4 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
+
+// basic React
+// https://www.youtube.com/watch?v=dGcsHMXbSOA&ab_channel=DevEd
 
 // Dark & Light Themes
 // https://www.smashingmagazine.com/2020/04/dark-mode-react-apps-styled-components/#globalstyles-component
