@@ -1,40 +1,33 @@
-import React from 'react'
-import logo from './logo.svg'
-import tauriCircles from './tauri.svg'
-import tauriWord from './wordmark.svg'
-import './App.css'
+import React, { useState } from 'react';
+
+// Dark & Light Themes
+// https://www.smashingmagazine.com/2020/04/dark-mode-react-apps-styled-components/#globalstyles-component
+import {ThemeProvider} from "styled-components";
+import { GlobalStyles } from "./Components/globalStyles";
+import { lightTheme, darkTheme } from "./Components/Themes"
+
+// Custom Components
+import Sidebar from './Components/Sidebar'
+
+
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <div className="inline-logo">
-          <img src={tauriCircles} className="App-logo rotate" alt="logo" />
-          <img src={tauriWord} className="App-logo smaller" alt="logo" />
-        </div>
-        <a
-          className="App-link"
-          href="https://tauri.studio"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn Tauri
-        </a>
-        <img src={logo} className="App-logo rotate" alt="logo" />
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-      </header>
+  const [theme, setTheme] = useState('light');
+  const themeToggler = () => {
+    theme === 'light' ? setTheme('dark') : setTheme('light')
+}
+
+  return(
+    <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
+      <>
+      <GlobalStyles/>
+    <div>
+      {/* <Sidebar /> */}
+      <button onClick={themeToggler}>Switch Theme</button>
     </div>
+    </>
+    </ThemeProvider>
   )
 }
 
-export default App
+export default App;
