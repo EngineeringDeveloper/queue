@@ -1,0 +1,6 @@
+.Sidebar {
+    height: 100vw;
+    width: 300px;
+    background: var(--theme-margin);
+    border: var(--theme-other1);
+  }

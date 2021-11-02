@@ -1,0 +1,30 @@
+.light {
+  --theme-color: #a80000;
+  --theme-page-background: #fff;
+  --theme-page-text: #111;
+  --theme-body: #c1e0f7;
+  --theme-toggleBorder: #97f9f9;
+  --theme-background: #a4def9;
+  --theme-text: #393b44;
+  --theme-margin: #6d597aff;
+  --theme-other1: #b56576ff;
+  --theme-other2: #e56b6fff;
+  --theme-other3: #eaac8bff;
+}
+
+/* https://coolors.co/006466-065a60-0b525b-144552-1b3a4b-212f45-272640-312244-3e1f47-4d194d */
+.dark {
+  --theme-color: #0000a8;
+  --theme-page-background: #111;
+  --theme-page-text: #fff;
+  --theme-body: #272640;
+  --theme-text: #FFF;
+  --theme-toggleBorder: #006466;
+  --theme-background: #272640;
+  --theme-margin: #0b525b;
+  --theme-other1: #3e1f47;
+  --theme-other2: #312244;
+  --theme-other3: #212f45;
+}
+
+

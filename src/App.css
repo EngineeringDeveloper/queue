@@ -1,7 +1,15 @@
+/* https://medium.com/swlh/setting-up-light-and-dark-mode-in-a-react-application-just-with-styles-7790dea22aed */
+
 .App {
   width: 100vw;
   height: 100vh;
-  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  background: var(--theme-page-background);
+  color: var(--theme-page-text);
 }
 
 body {
@@ -9,60 +17,5 @@ body {
   padding: 0;
 }
 
-/* body.light-theme {
-  --text-color: #222;
-  --bkg-color: #fff;
-  --anchor-color: #0033cc;
-  --y-in-mn-blue: #355070ff;
-  --chinese-violet: #6d597aff;
-  --rose-dust: #b56576ff;
-  --candy-pink: #e56b6fff;
-  --right: #eaac8bff;
-  --y-in-mn-blue: #355070ff;
-  --chinese-violet: #6d597aff;
-  --rose-dust: #b56576ff;
-  --candy-pink: #e56b6fff;
-  --tumbleweed: #eaac8bff;
-}
 
-body.dark-theme {
-  --text-color: #eee;
-  --bkg-color: #121212;
-  --anchor-color: #809fff;
-  --skobeloff: #006466ff;
-  --midnight-green-eagle-green: #065a60ff;
-  --midnight-green-eagle-green-2: #0b525bff;
-  --midnight-green-eagle-green-3: #144552ff;
-  --charcoal: #1b3a4bff;
-  --prussian-blue: #212f45ff;
-  --space-cadet: #272640ff;
-  --dark-purple: #312244ff;
-  --right: #3e1f47ff;
-  --russian-violet-2: #4d194dff;
-
-  --skobeloff: #006466ff;
-  --midnight-green-eagle-green: #065a60ff;
-  --midnight-green-eagle-green-2: #0b525bff;
-  --midnight-green-eagle-green-3: #144552ff;
-  --charcoal: #1b3a4bff;
-  --prussian-blue: #212f45ff;
-  --space-cadet: #272640ff;
-  --dark-purple: #312244ff;
-  --russian-violet: #3e1f47ff;
-  --russian-violet-2: #4d194dff;
-}
-
-body {
-  color: var(--text-color);
-  background: var(--bkg-color);
-}
-a {
-  color: var(--anchor-color);
-} */
-
-.Sidebar {
-  height: 100vw;
-  width: 300px;
-  background-color: var(--right);
-}
 
