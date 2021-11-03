@@ -32,9 +32,11 @@ function App() {
         <div className="Column">
           <Sidebar />
         </div>
-        <div className="Column">
+        <div className="Grow">
+          <div className="Content">
           {/* Theme toggling Button  */}
           <ThemeToggler theme={theme} toggleTheme={themeToggler}/>
+          </div>
         </div>
       </div>
     </div>

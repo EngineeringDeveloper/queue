@@ -11,13 +11,23 @@
   color: var(--theme-page-text);
 }
 
+.Content {
+  width: 100% - 120px
+}
+
 .Row {
   display: table;
   width: 100%;
 }
 .Column {
-  flex: 1 1 auto;
   display: table-cell;
+  /* flex: 1 1 auto; */
+  width: 0.01%;
+  white-space: nowrap;
+  /* flex-shrink: 2; */
+}
+.Grop {
+  width: 100%
 }
 
 body {
