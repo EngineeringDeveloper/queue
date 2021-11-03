@@ -24,7 +24,8 @@
 		{
 			"type": "shell",
 			"label": "yarn tauri dev",
-			"command": "yarn tauri dev",
+			"command": "yarn",
+			"args": ["tauri", "dev"],
 			"problemMatcher": []
 		}
 	]

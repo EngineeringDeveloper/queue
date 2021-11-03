@@ -4,18 +4,25 @@
   width: 100vw;
   height: 100vh;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
-
   background: var(--theme-page-background);
   color: var(--theme-page-text);
 }
 
-body {
+.Row {
+  display: table;
+  width: 100%; /*Optional*/
+}
+.Column {
+  display: table-cell;
+}
+
+/* body {
   margin: 0;
   padding: 0;
-}
+} */
 
 
 

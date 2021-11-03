@@ -14,6 +14,7 @@ import ThemeToggler from './Components/ThemeToggler';
 import  {useDarkMode} from "./Components/useDarkMode"
 // https://medium.com/swlh/setting-up-light-and-dark-mode-in-a-react-application-just-with-styles-7790dea22aed
 import './styles/theme.css';
+import './App.css'
 
 // Custom Components
 import Sidebar from './Components/Sidebar/Sidebar'
@@ -27,12 +28,14 @@ function App() {
   if(!mountedComponent) return <div/>
   return(
     <div className={`App ${theme}`}>
-      <div>
-        <Sidebar />
-      </div>
-      <div>
-        {/* Theme toggling Button  */}
-        <ThemeToggler theme={theme} toggleTheme={themeToggler}/>
+      <div className="Row">
+        <div className="Column">
+          <Sidebar />
+        </div>
+        <div className="Column">
+          {/* Theme toggling Button  */}
+          <ThemeToggler theme={theme} toggleTheme={themeToggler}/>
+        </div>
       </div>
     </div>
     )
