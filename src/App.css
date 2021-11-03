@@ -13,16 +13,17 @@
 
 .Row {
   display: table;
-  width: 100%; /*Optional*/
+  width: 100%;
 }
 .Column {
+  flex: 1 1 auto;
   display: table-cell;
 }
 
-/* body {
+body {
   margin: 0;
   padding: 0;
-} */
+}
 
 
 
