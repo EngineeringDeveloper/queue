@@ -33,7 +33,7 @@ function App() {
           <Sidebar />
           <Taskview />
             {/* Theme toggling Button  */}
-            {/* <ThemeToggler theme={theme} toggleTheme={themeToggler}/> */}
+            <ThemeToggler theme={theme} toggleTheme={themeToggler}/>
       </div>
     </div>
     )
