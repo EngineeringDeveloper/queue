@@ -1,26 +1,5 @@
 {
-	"version": "2.0.0",
-	"tasks": [
-		{
-			"type": "npm",
-			"label": "Start Webpack Dev",
-			"script": "start:renderer",
-			"options": {
-				"cwd": "${workspaceFolder}"
-			},
-			"isBackground": true,
-			"problemMatcher": {
-				"owner": "custom",
-				"pattern": {
-					"regexp": "____________"
-				},
-				"background": {
-					"activeOnStart": true,
-					"beginsPattern": "Compiling\\.\\.\\.$",
-					"endsPattern": "(Compiled successfully|Failed to compile)\\.$"
-				}
-			}
-		},
+	[
 		{
 			"type": "shell",
 			"label": "Development",
@@ -33,6 +12,13 @@
 			"label": "Production",
 			"command": "yarn",
 			"args": ["tauri", "build"],
+			"problemMatcher": []
+		},
+		{
+			"type": "shell",
+			"label": "Re-install Tauri",
+			"command": "yarn",
+			"args": ["add", "@tauri-apps/api"],
 			"problemMatcher": []
 		}
 	]

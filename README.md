@@ -3,7 +3,7 @@ GUI Application for task and Job planning with priority consideration
 
 <div align="center">
 
-[![Test](https://github.com/EngineeringDeveloper/queue/actions/workflows/test.yml/badge.svg)](https://github.com/EngineeringDeveloper/queue/actions/workflows/test.yml)
+[![test-build-on-push](https://github.com/EngineeringDeveloper/queue/actions/workflows/react_build_test.yml/badge.svg)](https://github.com/EngineeringDeveloper/queue/actions/workflows/react_build_test.yml)
 
 </div>
 
