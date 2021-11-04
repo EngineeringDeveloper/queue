@@ -23,9 +23,16 @@
 		},
 		{
 			"type": "shell",
-			"label": "yarn tauri dev",
+			"label": "Development",
 			"command": "yarn",
 			"args": ["tauri", "dev"],
+			"problemMatcher": []
+		},
+		{
+			"type": "shell",
+			"label": "Production",
+			"command": "yarn",
+			"args": ["tauri", "build"],
 			"problemMatcher": []
 		}
 	]
