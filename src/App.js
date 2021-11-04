@@ -18,6 +18,7 @@ import './App.css'
 
 // Custom Components
 import Sidebar from './Components/Sidebar/Sidebar'
+import Taskview from './Components/Taskview/Taskview'
 
 
 function App() {
@@ -29,15 +30,10 @@ function App() {
   return(
     <div className={`App ${theme}`}>
       <div className="Row">
-        <div className="Column">
           <Sidebar />
-        </div>
-        <div className="Grow">
-          <div className="Content">
-          {/* Theme toggling Button  */}
-          <ThemeToggler theme={theme} toggleTheme={themeToggler}/>
-          </div>
-        </div>
+          <Taskview />
+            {/* Theme toggling Button  */}
+            {/* <ThemeToggler theme={theme} toggleTheme={themeToggler}/> */}
       </div>
     </div>
     )

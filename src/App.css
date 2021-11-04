@@ -3,32 +3,21 @@
 .App {
   width: 100vw;
   height: 100vh;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
   background: var(--theme-page-background);
   color: var(--theme-page-text);
 }
 
 .Content {
-  width: 100% - 120px
+  width: 100% - 100px;
+  height: 100%;
 }
 
 .Row {
-  display: table;
+  display: flex;
   width: 100%;
+
 }
-.Column {
-  display: table-cell;
-  /* flex: 1 1 auto; */
-  width: 0.01%;
-  white-space: nowrap;
-  /* flex-shrink: 2; */
-}
-.Grop {
-  width: 100%
-}
+
 
 body {
   margin: 0;
