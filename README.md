@@ -19,6 +19,12 @@ https://blog.logrocket.com/supercharge-your-electron-apps-with-rust/
 https://github.com/ransome1/sleek  
 https://bit.dev/  
 
+## Debugging Electron App
+
+```bash
+Ctrl + Shift + i
+```
+
 
 ## Starting Development
 
