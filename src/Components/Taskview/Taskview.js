@@ -6,7 +6,8 @@ function Taskview  (){
         return (
             <div className="Taskview">
                 <div className="Header">
-                <div>"Header"</div>
+                    <div>"Header"</div>
+                    <input type="text">Test</input>
                 </div>
                 <div className="Content">
                     <p>"Content"</p>

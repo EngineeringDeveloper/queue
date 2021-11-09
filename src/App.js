@@ -19,7 +19,7 @@ import './App.css'
 // Custom Components
 import Sidebar from './Components/Sidebar/Sidebar'
 import Taskview from './Components/Taskview/Taskview'
-
+import NewToDoModal from './Components/NewToDoModal/NewToDoModal'
 
 function App() {
   // Theme toggling
@@ -33,7 +33,8 @@ function App() {
           <Sidebar />
           <Taskview />
             {/* Theme toggling Button  */}
-          {/* <ThemeToggler theme={theme} toggleTheme={themeToggler}/> */}
+        {/* <ThemeToggler theme={theme} toggleTheme={themeToggler}/> */}
+          <NewToDoModal />
       </div>
     </div>
     )
