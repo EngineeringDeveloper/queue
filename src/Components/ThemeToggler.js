@@ -4,7 +4,7 @@ import styled from "styled-components"
 
 const Button = styled.button`
   background: ${({ theme }) => theme.background};
-  border: 2px solid ${({ theme }) => theme.toggleBorder};
+  border: 2px solid ${({ theme }) => theme.margin};
   color: ${({ theme }) => theme.text};
   border-radius: 30px;
   cursor: pointer;
