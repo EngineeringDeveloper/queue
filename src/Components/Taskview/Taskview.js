@@ -1,13 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Taskview.css'
 
 function Taskview  (){
-
+    const [input, setInput] = useState(''); // '' is the initial state value
+// https://stackoverflow.com/questions/36683770/how-to-get-the-value-of-an-input-field-using-reactjs
         return (
             <div className="Taskview">
                 <div className="Header">
                     <div>"Header"</div>
-                    <input type="text">Test</input>
+                        <div>
+                        <label>Please specify:</label>
+                        <input value={input} onInput={e => setInput(e.target.value)}/>
+                        </div>
                 </div>
                 <div className="Content">
                     <p>"Content"</p>
