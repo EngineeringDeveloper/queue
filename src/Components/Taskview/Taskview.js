@@ -1,18 +1,19 @@
 import React, { useState } from 'react';
 import './Taskview.css'
+import SearchIcon from '@mui/icons-material/Search';
 
 function Taskview  (){
     const [input, setInput] = useState(''); // '' is the initial state value
 // https://stackoverflow.com/questions/36683770/how-to-get-the-value-of-an-input-field-using-reactjs
         return (
             <div className="Taskview">
-                <div className="Header">
-                    <div>"Header"</div>
+                <header className="Header">
+                    <div></div>
                         <div>
-                        <label>Please specify:</label>
+                        <SearchIcon />
                         <input value={input} onInput={e => setInput(e.target.value)}/>
                         </div>
-                </div>
+                </header>
                 <div className="Content">
                     <p>"Content"</p>
                     <p>Applied mechanics is the branch of science concerned with the motion of any substance that can be experienced or perceived by humans without the help of instruments[1]. In short, when mechanics concepts surpass being theoretical and are applied and executed, general mechanics becomes applied mechanics. It is this stark difference that makes applied mechanics an essential understanding for practical everyday life[2]. It has numerous applications in a wide variety of fields and disciplines, including but not limited to structural engineering, astronomy, oceanography, meteorology, hydraulics, mechanical engineering, aerospace engineering, nanotechnology, structural design, earthquake engineering, fluid dynamics, planetary sciences, and other life sciences[3][4]. Connecting research between numerous disciplines, applied mechanics plays an important role in both science and engineering[1].
