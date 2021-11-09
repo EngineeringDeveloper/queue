@@ -11,7 +11,7 @@ export const SidebarDataIcon  = [
     {
         // title:"Queue",
         icon: <EmojiEmotionsIcon />,
-        link: "/home",
+        link: "/",
     },
 ]
 
@@ -24,7 +24,7 @@ export const SidebarDataTop  = [
     {
         title:"Add To Do",
         icon: <ControlPointIcon />,
-        link: "/addToDOModal",
+        link: "/addToDoModal",
     },
     {
         // https://www.w3schools.com/howto/howto_js_sidenav.asp
