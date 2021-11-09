@@ -33,8 +33,8 @@ function Sidebar() {
                     )
                 })}
             </ul>
-            <div className="spacer"></div>
-            <ul className= "SidebarList">
+            {/* <div className="spacer"></div> */}
+            <ul className= "SidebarListBottom">
                 {SidebarDataBottom.map((val, key) => {
                     return (
                         <li key={key} 

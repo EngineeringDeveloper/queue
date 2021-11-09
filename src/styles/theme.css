@@ -4,6 +4,7 @@
   --theme-text-notselected: #A5A5A5; /* not selected text*/ 
   --theme-text-clickable: #4273DD; /* clickable text */
   --theme-margin: #F0F0F0; /* Navbar background */
+  --theme-hover: #C8C8C8; /* custom */
   --theme-foreground: #EBEBEB; /* sidebar foreground */
   --theme-modal: #FFFFFF; /* Modal */
   /* dulled? BFBFBF */
@@ -16,6 +17,7 @@
   --theme-text-notselected: #6C6C6C; /* not selected text*/ 
   --theme-text-clickable: #F0F0F0; /* clickable text */
   --theme-margin: #2d2d2d; /* Navbar background */
+  --theme-hover: #3C3C3C; /* custom */
   --theme-foreground: #5a5a5a; /* sidebar foreground */
   --theme-modal: #3B3B3B; /* Modal */
 }
