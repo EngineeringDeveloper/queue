@@ -10,6 +10,20 @@
     "beforeBuildCommand": "yarn build"
   },
   "tauri": {
+    "allowlist": {             
+      "all": false,                 
+      "shell": {
+        "execute": false,             
+        "open": false
+      },
+      "fs": {
+        "listFiles": false,           
+        "readBinaryFile": false,      
+        "readTextFile": false,        
+        "setTitle": false,           
+        "writeFile": false            
+      }
+    },
     "bundle": {
       "active": true,
       "targets": "all",
@@ -47,9 +61,6 @@
     },
     "updater": {
       "active": false
-    },
-    "allowlist": {
-      "all": true
     },
     "windows": [
       {
