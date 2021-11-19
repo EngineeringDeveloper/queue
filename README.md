@@ -7,7 +7,7 @@ GUI Application for task and Job planning with priority consideration
 
 </div>
 
-Written in JavaScript with an React end & a back end in Rust via Taurinp
+Written in JavaScript with an React end & a back end in Rust via Tauri
 
 ## References:  
 https://github.com/todotxt/todo.txt  
