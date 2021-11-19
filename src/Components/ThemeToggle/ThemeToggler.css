@@ -1,0 +1,9 @@
+.button {
+    background: var(--theme-background);
+    border: 2px solid var(--theme-margin);
+    color: --theme-text;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size:0.8rem;
+    padding: 0.6rem;
+}

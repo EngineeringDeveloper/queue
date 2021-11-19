@@ -1,6 +1,6 @@
 import React from 'react';
 import './Sidebar.css';
-import ThemeToggler from '../ThemeToggler';
+import ThemeToggler from '../ThemeToggle/ThemeToggler';
 import {SidebarDataIcon, SidebarDataTop, SidebarDataBottom} from './SidebarData'
 
 // https://www.youtube.com/watch?v=5R9jFHlG6ik&ab_channel=PedroTech

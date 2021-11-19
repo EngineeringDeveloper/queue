@@ -10,7 +10,7 @@ import React from 'react';
 // import { lightTheme, darkTheme } from "./Components/Themes"
 
 // Theme
-import { useDarkMode } from "./Components/useDarkMode"
+import { useDarkMode } from "./Components/ThemeToggle/useDarkMode"
 import { ThemeProvider } from 'styled-components';
 // https://medium.com/swlh/setting-up-light-and-dark-mode-in-a-react-application-just-with-styles-7790dea22aed
 import './styles/theme.css';
