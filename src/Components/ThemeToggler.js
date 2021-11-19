@@ -1,6 +1,7 @@
 import React from 'react'
 import { func, string } from 'prop-types';
 import styled from "styled-components"
+// import  {useDarkMode} from "./useDarkMode"
 
 const Button = styled.button`
   background: ${({ theme }) => theme.background};
@@ -13,7 +14,9 @@ const Button = styled.button`
   }
 /`;
 
-const ThemeToggler = ({theme,  toggleTheme }) => {
+const ThemeToggler = ({ theme, toggleTheme }) => {
+    // const [themeToggler, mountedComponent] = useDarkMode();
+  
     return (
         <Button onClick={toggleTheme} >
           Switch Theme

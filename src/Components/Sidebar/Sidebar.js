@@ -1,11 +1,12 @@
 import React from 'react';
 import './Sidebar.css';
+import ThemeToggler from '../ThemeToggler';
 import {SidebarDataIcon, SidebarDataTop, SidebarDataBottom} from './SidebarData'
 
 // https://www.youtube.com/watch?v=5R9jFHlG6ik&ab_channel=PedroTech
-function Sidebar() {
+function Sidebar({ theme, toggleTheme }) {
     return(
-        <div className="Sidebar">
+        <div className="Sidebar" >
             <ul className= "SidebarList">
                 {SidebarDataIcon.map((val, key) => {
                     return (
@@ -33,6 +34,7 @@ function Sidebar() {
                     )
                 })}
             </ul>
+            <ThemeToggler theme={theme} toggleTheme={toggleTheme}/>
             {/* <div className="spacer"></div> */}
             <ul className= "SidebarListBottom">
                 {SidebarDataBottom.map((val, key) => {

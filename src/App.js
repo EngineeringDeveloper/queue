@@ -10,7 +10,6 @@ import React from 'react';
 // import { lightTheme, darkTheme } from "./Components/Themes"
 
 // Theme
-import ThemeToggler from './Components/ThemeToggler';
 import  {useDarkMode} from "./Components/useDarkMode"
 // https://medium.com/swlh/setting-up-light-and-dark-mode-in-a-react-application-just-with-styles-7790dea22aed
 import './styles/theme.css';
@@ -30,7 +29,8 @@ function App() {
   return(
     <div className={`App ${theme}`}>
       <div className="Row">
-          <Sidebar />
+        <Sidebar theme={theme} toggleTheme={themeToggler} />
+        {/*Pass down theme and toggler to component that needs it */}
           <Taskview />
             {/* Theme toggling Button  */}
         {/* <ThemeToggler theme={theme} toggleTheme={themeToggler}/> */}

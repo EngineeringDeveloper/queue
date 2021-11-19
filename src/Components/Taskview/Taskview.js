@@ -8,11 +8,12 @@ function Taskview  (){
         return (
             <div className="Taskview">
                 <header className="Header">
-                    <div></div>
-                        <div>
+                    {/* <div></div> */}
+                        {/* <div> */}
                         <SearchIcon />
-                        <input value={input} onInput={e => setInput(e.target.value)}/>
-                        </div>
+                        <input className="TaskviewSearch" type="search" value={input} onInput={e => setInput(e.target.value)}
+                        placeholder="(A) Todo text +project @context due:2020-12-12 rec:d"/>
+                        {/* </div> */}
                 </header>
                 <div className="Content">
                     <p>"Content"</p>

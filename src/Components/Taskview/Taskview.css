@@ -28,16 +28,31 @@
   position: sticky;
   top: 0;
   /* End */
+  display: flex;
   float: left;
   background-color: var(--theme-foreground);
   padding: 32px;
-  justify-content: left;
-  justify-items: center;
   border-radius: 50pt;
   margin-right: 30px;
   margin-bottom: 10px;
-  /* display: flex; */
-  /* width: 100%; */
-  /* vertical-align: middle; */
-  /* box-sizing: border-box; */
+}
+
+.TaskviewSearch {
+  align-items: center;
+  box-sizing: border-box;
+  font-size: large;
+  display: inline-flex;
+  justify-content: flex-start;
+  width: 100%;
+  background-color: var(--theme-foreground); 
+  border-style: none;
+  font-family: sans-serif;
+}
+
+input::placeholder{
+  color: var(--theme-text-notselected);
+}
+
+input {
+  color: var(--theme-text);
 }
