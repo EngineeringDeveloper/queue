@@ -1,4 +1,4 @@
-name: "test-build-on-push"
+name: "Build"
 on: [push]
 
 jobs:
@@ -6,7 +6,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        platform: [macos-latest, ubuntu-latest, windows-latest]
+        platform: [ubuntu-latest, windows-latest]
 
     runs-on: ${{ matrix.platform }}
     steps:
