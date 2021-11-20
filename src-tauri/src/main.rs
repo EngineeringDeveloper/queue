@@ -13,5 +13,5 @@ fn main() {
 // Example Tauri command
 #[tauri::command]
 fn print_from_rust() {
-  println!("I was generated in Rust!") 
+  println!("I was generated in Rust!")
 }
