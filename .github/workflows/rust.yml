@@ -1,4 +1,4 @@
-name: Rust Tests & Clippy Lint
+name: "Rust Tests & Clippy Lint"
 
 on: push
 
