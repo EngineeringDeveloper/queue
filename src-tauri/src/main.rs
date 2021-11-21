@@ -4,11 +4,11 @@
 )]
 
 mod todo;
-use todo::parse_example;
+use todo::parse_todo;
 
 fn main() {
   tauri::Builder::default()
-    .invoke_handler(tauri::generate_handler![print_from_rust, parse_example])
+    .invoke_handler(tauri::generate_handler![print_from_rust, parse_todo])
     .run(tauri::generate_context!())
     .expect("error while running tauri application");
 }
@@ -17,5 +17,4 @@ fn main() {
 #[tauri::command]
 fn print_from_rust() {
   println!("I was generated in Rust!");
-  parse_example("path");
 }

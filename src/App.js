@@ -42,7 +42,6 @@ function App() {
       <div className={`App ${theme}`}>
         <div className="Row">
           <Sidebar theme={theme} toggleTheme={themeToggler} />
-          <button onClick={() => invoke("print_from_rust")} >help</button>
           <NewToDoModal />
           <Taskview />
         </div>
