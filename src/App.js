@@ -25,7 +25,7 @@ import NewToDoModal from './Components/NewToDoModal/NewToDoModal'
 // Tauri Commands
 // https://tauri.studio/en/docs/usage/guides/command
 // With the Tauri API npm package:
-// import { invoke } from '@tauri-apps/api/tauri'
+import { invoke } from '@tauri-apps/api/tauri'
 // With the Tauri global script, enabled when `tauri.conf.json > build > withGlobalTauri` is set to true:
 
 
@@ -34,6 +34,7 @@ function App() {
   const [theme, themeToggler, mountedComponent] = useDarkMode();
   // const invoke =  window.__TAURI__.invoke
   // const themeMode = theme === 'light' ? lightTheme : darkTheme;
+  // const log = 
 
   if (!mountedComponent) return <div />
   
@@ -41,7 +42,7 @@ function App() {
       <div className={`App ${theme}`}>
         <div className="Row">
           <Sidebar theme={theme} toggleTheme={themeToggler} />
-          <button onClick={console.log("help")} >help</button>
+          <button onClick={() => invoke("print_from_rust")} >help</button>
           <NewToDoModal />
           <Taskview />
         </div>
