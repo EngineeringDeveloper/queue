@@ -1,10 +1,6 @@
-name: Rust Tests
+name: Rust Tests & Clippy Lint
 
-on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+on: push
 
 env:
   CARGO_TERM_COLOR: always
@@ -19,3 +15,13 @@ jobs:
     - name: Run Tests 
       working-directory: ./src-tauri
       run: cargo test --verbose
+      
+  clippy_check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: rustup component add clippy
+      - working-directory: ./src-tauri
+      - uses: actions-rs/clippy-check@v1
+
+    
