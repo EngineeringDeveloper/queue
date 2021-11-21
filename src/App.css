@@ -5,7 +5,7 @@
   height: 100vh;
   background: var(--theme-background);
   color: var(--theme-text);
-  min-height: 300px;
+  /* min-height: 300px; */
 }
 
 .Row {
