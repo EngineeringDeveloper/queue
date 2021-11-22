@@ -1,4 +1,4 @@
-import React, { Component, Suspense, useState } from "react";
+import React, { Component} from "react";
 import "./Taskview.css";
 import SearchIcon from "@mui/icons-material/Search";
 import CircularProgress from '@mui/material/CircularProgress';
@@ -14,26 +14,13 @@ class Taskview extends Component {
       error: null,
       loading: true,
     };
-    // console.log(showLoad(this.state))
     }
-    
-  // const [input, setInput] = useState('input'); // '' is the initial state value
-  // const [taskList, settaskList] = useState('taskList'); // '' is the initial state value
-  // settaskList ( {
-  //     taskList: null,
-  //     error: null,
-  //     loading: true,
-  // });
-  // invoke("parse_todo", { path: "path" }).then((taskList) => taskList.map((key, val) => console.log(key)));
-  // const taskList = invoke("parse_todo", { path: "path" });
 
-  componentDidMount() {
+    componentDidMount() {
+      // If the component mounted then we evaluate if the promise resolved
     this.state.taskList
         .then((list) => {
-        
-        // console.log(list)
         this.setState({ taskList: list.map((value, key) => {
-            // console.log(key, value.subject)
             return (
                 <li key={key} className='row'>
                     <div id='content'>{value.subject}</div>
@@ -43,29 +30,18 @@ class Taskview extends Component {
     })
     .finally(() => {
         this.setState({ loading: false } );
-        // console.log(this.props.taskList)
     });
   }
 
   // https://stackoverflow.com/questions/36683770/how-to-get-the-value-of-an-input-field-using-reactjs
     render() {
-        let loading;
+        let LoadedTasks;
         if (this.state.loading) {
             console.log(this.state.loading);
-            loading = <box id="icon" ><CircularProgress color="inherit"/></box>;
+            LoadedTasks = <box id="icon" ><CircularProgress color="inherit"/></box>;
         } else {
             console.log(this.state)
-            // let list = this.props.taskList
-            loading = this.state.taskList
-            // console.log(list);
-            // loading = list.map((value, key) => {
-            //     console.log(key, value.subject)
-            //     return (
-            //         <li key={key} className='row'>
-            //             <div id='content'>{value.subject}</div>
-            //         </li>
-            //     );
-            // });
+            LoadedTasks = this.state.taskList
         }
     
         return (
@@ -82,8 +58,7 @@ class Taskview extends Component {
             </header>
             <ul className='Content'>
                     <p>"Content"</p>
-                    {loading}
-                    {/* <showLoad loading={this.state.loading}></showLoad> */}
+                    {LoadedTasks}
                     {/* <div id="icon" className='Loading'>
                         <SearchIcon />
                     </div> */}
