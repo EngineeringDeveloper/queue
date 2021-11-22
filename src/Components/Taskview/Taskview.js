@@ -59,30 +59,6 @@ class Taskview extends Component {
             <ul className='Content'>
                     <p>"Content"</p>
                     {LoadedTasks}
-                    {/* <div id="icon" className='Loading'>
-                        <SearchIcon />
-                    </div> */}
-                
-                    {/* <div id="icon" className='Loading'>
-                    <SearchIcon />
-                    </div> */}
-              {/* <Suspense id='icon' fallback={<SearchIcon className='Loading' />}> */}
-                
-                {/* {invoke("parse_todo", { path: "path" }).then((taskList) => {
-                            // console.log(taskList[0].subject)
-                            taskList.map((value, key) => {
-                                // console.log(key, value.subject)
-                                return (
-                                    <li key={key}
-                                        className="row">
-                                        <div id="content">
-                                            {value.subject}
-                                        </div>
-                                    </li>
-                                )
-                            })
-                        })} */}
-              {/* </Suspense> */}
             </ul>
           </div>
         );
