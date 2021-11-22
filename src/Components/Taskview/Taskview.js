@@ -29,23 +29,43 @@ class Taskview extends Component {
 
   componentDidMount() {
     this.state.taskList
-      .then((taskList) => {
-        this.setState({ taskList: taskList });
-      })
-      .catch()
-      .finally(() => {
-        this.setState({ loading: false });
-      });
+        .then((list) => {
+        
+        // console.log(list)
+        this.setState({ taskList: list.map((value, key) => {
+            // console.log(key, value.subject)
+            return (
+                <li key={key} className='row'>
+                    <div id='content'>{value.subject}</div>
+                </li>
+            );
+        })});
+    })
+    .finally(() => {
+        this.setState({ loading: false } );
+        // console.log(this.props.taskList)
+    });
   }
 
   // https://stackoverflow.com/questions/36683770/how-to-get-the-value-of-an-input-field-using-reactjs
     render() {
         let loading;
         if (this.state.loading) {
-            console.log(this.props.loading);
+            console.log(this.state.loading);
             loading = <box id="icon" ><CircularProgress color="inherit"/></box>;
         } else {
-            loading = <div/>
+            console.log(this.state)
+            // let list = this.props.taskList
+            loading = this.state.taskList
+            // console.log(list);
+            // loading = list.map((value, key) => {
+            //     console.log(key, value.subject)
+            //     return (
+            //         <li key={key} className='row'>
+            //             <div id='content'>{value.subject}</div>
+            //         </li>
+            //     );
+            // });
         }
     
         return (
@@ -72,14 +92,7 @@ class Taskview extends Component {
                     <SearchIcon />
                     </div> */}
               {/* <Suspense id='icon' fallback={<SearchIcon className='Loading' />}> */}
-                {this.props.taskList.map((value, key) => {
-                  // console.log(key, value.subject)
-                  return (
-                    <li key={key} className='row'>
-                      <div id='content'>{value.subject}</div>
-                    </li>
-                  );
-                })}
+                
                 {/* {invoke("parse_todo", { path: "path" }).then((taskList) => {
                             // console.log(taskList[0].subject)
                             taskList.map((value, key) => {
