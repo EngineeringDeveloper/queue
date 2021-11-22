@@ -10,7 +10,7 @@
 2021-11-08 to
 2021-11-08 scroll
 2021-11-08 vertically
-2021-11-08 And also some of the tasks could be scrolled horizontally if they are too long
+2021-11-08 And also some of the tasks could be scrolled horizontally if they are too long, to be honest i think this length of task description is far too long to be productive but needs to be tested
 2021-11-08 Progress
 2021-11-08 is
 2021-11-08 slow
