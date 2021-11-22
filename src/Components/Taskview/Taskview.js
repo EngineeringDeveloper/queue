@@ -1,4 +1,5 @@
-import React, { Component} from "react";
+import React, { Component } from "react";
+import Task from "./Task.js"
 import "./Taskview.css";
 import SearchIcon from "@mui/icons-material/Search";
 import CircularProgress from '@mui/material/CircularProgress';
@@ -22,8 +23,8 @@ class Taskview extends Component {
         .then((list) => {
         this.setState({ taskList: list.map((value, key) => {
             return (
-                <li key={key} className='row'>
-                    <div id='content'>{value.subject}</div>
+                <li key={key}>
+                    <Task details= {value}></Task>
                 </li>
             );
         })});
@@ -57,7 +58,6 @@ class Taskview extends Component {
               />
             </header>
             <ul className='Content'>
-                    <p>"Content"</p>
                     {LoadedTasks}
             </ul>
           </div>
