@@ -1,4 +1,4 @@
-name: Rust Tests & Clippy Lint
+name: "Rust-Tests"
 
 on: push
 
@@ -7,7 +7,6 @@ env:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
