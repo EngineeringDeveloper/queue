@@ -1,6 +1,11 @@
 import React from "react";
 import Checkbox from "@mui/material/Checkbox";
+import "./Task.css";
 
+function objHasContent(obj) {
+  for (var i in obj) return true;
+  return false;
+}
 // pub struct Simple {
 //     pub subject: String,
 //     #[cfg_attr(feature = "serde-support", serde(default = "Priority::lowest"))]
@@ -22,34 +27,39 @@ import Checkbox from "@mui/material/Checkbox";
 // }
 
 export default function Task(props) {
-  console.log(typeof props.details.tags);
-//   console.log(typeof props.details.priority);
+  const tags = objHasContent(props.details.tags)
+    ? props.details.tags.toString()
+    : "";
+
   return (
     <li key={props.details.priority} className='Task'>
       <Checkbox></Checkbox>
-      {/* <div>{"priority :"}</div> */}
-      <div>{props.details.priority}</div>
-      <div>{"subject :"}</div>
-      <div>{props.details.subject}</div>
-      <div>{"Project :"}</div>
-      <div>{props.details.projects}</div>
       <div>
-        <div>{"date :"}</div>
-        <div>{props.details.create_date}</div>
-        <div>{"date_f :"}</div>
-        <div>{props.details.finish_date}</div>
-        <div>{"fin :"}</div>
-        <div>{props.details.finished}</div>
-        <div>{"due :"}</div>
-        <div>{props.details.due_date}</div>
-        <div>{"contexts :"}</div>
-        <div>{props.details.contexts}</div>
-        <div>{"hash :"}</div>
-        <div>{props.details.hashtags}</div>
-        <div>{"tags :"}</div>
-        {/* {props.details.tags.map((value, key) => {
-                    return (<div> value </div>)
-            })} */}
+        {"subject :"}
+        <div>{props.details.subject}</div>
+      </div>
+
+      <div className='Project'>
+        {"Project :"}
+        <div>{props.details.projects}</div>
+      </div>
+
+      <div>
+        <div>{"date :" + props.details.create_date}</div>
+        <div>{"date_f :" + props.details.finish_date}</div>
+        <div>{"fin :" + props.details.finished}</div>
+        <div>{"due :" + props.details.due_date}</div>
+        <div className='Context'>
+          {"contexts :"}
+          <div>{props.details.contexts}</div>
+        </div>
+
+        <div className='Hashtag'>
+          {"hash :"}
+          <div>{props.details.hashtags}</div>
+        </div>
+
+        <div>{tags}</div>
       </div>
     </li>
   );

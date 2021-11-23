@@ -14,6 +14,9 @@ Written in JavaScript with an React end & a back end in Rust via Tauri
 https://github.com/todotxt/todo.txt  
 https://dev.to/krofax/creating-desktop-apps-with-reactjs-using-tauri-af  
 https://tauri.studio/en/docs/usage/development/development  
+possible alternative for todo-txt  
+https://github.com/VladimirMarkelov/todo_lib  
+
   
 ### Old
 https://blog.logrocket.com/supercharge-your-electron-apps-with-rust/  

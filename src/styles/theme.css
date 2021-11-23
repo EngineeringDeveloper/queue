@@ -21,3 +21,10 @@
   --theme-foreground: #5a5a5a; /* sidebar foreground */
   --theme-modal: #3B3B3B; /* Modal */
 }
+
+/* Unity colours */
+:root {
+  --project: #6b2770;
+  --context: #2b6251;
+  --hashtag: #12c8ed;
+}
