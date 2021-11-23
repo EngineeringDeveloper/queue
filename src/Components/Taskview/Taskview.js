@@ -54,6 +54,7 @@ class Taskview extends Component {
           // console.log(priorityOrder)
           outputArray.push(
             <li className="Priority" key={priorityOrder}>
+              <div>{priorityOrder < 26 ? (priorityOrder + 10).toString(36).toUpperCase() : "No Priority"}</div>
               <ul>
                 {subList.map((content, key) => {
                   return <Task details={content} key={key}></Task>;
