@@ -28,3 +28,8 @@
 2021-11-08 more
 2021-11-08 readable
 2021-11-08 language
+x 2021-11-23 2021-11-23 Some
+x 2021-11-23 2021-11-23 are Completed with +Project @context
+(A) 2021-11-23 Priority
+(B) 2021-11-23 next priority
+(C) 2021-11-23 other priorty with +Project @context
