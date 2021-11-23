@@ -1,9 +1,11 @@
 import React from 'react'
+import Checkbox from '@mui/material/Checkbox';
 
 export default function Task(props) {
     return (
-        <div className= "Task">
+        <li key={props.key}className="Task">
+            <Checkbox></Checkbox>
             <div>{props.details.subject}</div>
-        </div>
+        </li>
     )
 }

@@ -11,7 +11,9 @@ class Taskview extends Component {
     super(props);
     this.state = {
       input: "",
-      taskList: invoke("parse_todo", { path: "path" }),
+      taskList: invoke("parse_todo", {
+        path: "C:\\Users\\ryanc\\Documents\\Repositories\\queue\\testFiles\\todo.txt",
+      }),
       error: null,
       loading: true,
     };
@@ -23,9 +25,7 @@ class Taskview extends Component {
         .then((list) => {
         this.setState({ taskList: list.map((value, key) => {
             return (
-                <li key={key}>
-                    <Task details= {value}></Task>
-                </li>
+                <Task details={value} key={key}></Task>
             );
         })});
     })
