@@ -20,7 +20,9 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - run: rustup component add clippy
-    - working-directory: ./src-tauri
     - uses: actions-rs/clippy-check@v1
+      with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          args: -p ./src-tauri
 
   
