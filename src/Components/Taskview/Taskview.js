@@ -6,6 +6,22 @@ import CircularProgress from "@mui/material/CircularProgress";
 // https://mui.com/components/progress/
 import { invoke } from "@tauri-apps/api/tauri";
 
+// js function for grouping by an internal json value
+function groupBy(list, keyGetter) {
+  const map = new Map();
+  list.forEach((item) => {
+    const key = keyGetter(item);
+    const collection = map.get(key);
+    if (!collection) {
+      map.set(key, [item]);
+    } else {
+      collection.push(item);
+    }
+  });
+  const sortedMap = new Map([...map.entries()].sort());
+  return sortedMap;
+}
+
 class Taskview extends Component {
   constructor(props) {
     super(props);
@@ -23,12 +39,43 @@ class Taskview extends Component {
     // If the component mounted then we evaluate if the promise resolved
     this.state.taskList
       .then((list) => {
-        let sortedList = list.sort((a, b) => a.priority - b.priority);
-        this.setState({
-          taskList: sortedList.map((value, key) => {
-            return <Task details={value} key={key}></Task>;
-          }),
-        });
+        // group the list by priority levels
+        // let sortedList = list.sort((a, b) => a.priority - b.priority);
+        // this.setState({
+        //   taskList: sortedList.map((value, key) => {
+        //     return <Task details={value} key={key}></Task>;
+        //   }),
+        // });
+        let groupedMap = groupBy(list, (obj) => obj.priority);
+        console.log(groupedMap)
+        // groupedMap = groupedMap.sort((a, b) => a.key - b.key)
+        let outputArray = [];
+        for (let [priorityOrder, subList] of groupedMap) {
+          // console.log(priorityOrder)
+          outputArray.push(
+            <li className="Priority" key={priorityOrder}>
+              <ul>
+                {subList.map((content, key) => {
+                  return <Task details={content} key={key}></Task>;
+                })}
+              </ul>
+            </li>
+          );
+        }
+        console.log(outputArray)
+        this.setState({ taskList: outputArray });
+        // let sortedList = list.sort((a, b) => a.priority - b.priority);
+        // this.setState({
+        //   taskList: groupedList.map((subList, priorityOrder) => {
+        //     return (
+        //       <ul key={priorityOrder}>
+        //         {subList.map((content, key) => {
+        //           return <Task details={content} key={key}></Task>;
+        //         })}
+        //       </ul> // could be Prority wrapper
+        //     );
+        //   }),
+        // });
       })
       .finally(() => {
         this.setState({ loading: false });
