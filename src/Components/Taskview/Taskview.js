@@ -22,6 +22,25 @@ function groupBy(list, keyGetter) {
   return sortedMap;
 }
 
+function sortTaskList(list) {
+  let groupedMap = groupBy(list, (obj) => obj.priority);
+  console.log(groupedMap)
+  let outputArray = [];
+  for (let [priorityOrder, subList] of groupedMap) {
+    outputArray.push(
+      <li className="Priority" key={priorityOrder}>
+        <div>{priorityOrder < 26 ? (priorityOrder + 10).toString(36).toUpperCase() : "No Priority"}</div>
+        <ul>
+          {subList.map((content, key) => {
+            return <Task details={content} key={key}></Task>;
+          })}
+        </ul>
+      </li>
+    );
+  }
+  return outputArray
+}
+
 class Taskview extends Component {
   constructor(props) {
     super(props);
@@ -39,44 +58,7 @@ class Taskview extends Component {
     // If the component mounted then we evaluate if the promise resolved
     this.state.taskList
       .then((list) => {
-        // group the list by priority levels
-        // let sortedList = list.sort((a, b) => a.priority - b.priority);
-        // this.setState({
-        //   taskList: sortedList.map((value, key) => {
-        //     return <Task details={value} key={key}></Task>;
-        //   }),
-        // });
-        let groupedMap = groupBy(list, (obj) => obj.priority);
-        console.log(groupedMap)
-        // groupedMap = groupedMap.sort((a, b) => a.key - b.key)
-        let outputArray = [];
-        for (let [priorityOrder, subList] of groupedMap) {
-          // console.log(priorityOrder)
-          outputArray.push(
-            <li className="Priority" key={priorityOrder}>
-              <div>{priorityOrder < 26 ? (priorityOrder + 10).toString(36).toUpperCase() : "No Priority"}</div>
-              <ul>
-                {subList.map((content, key) => {
-                  return <Task details={content} key={key}></Task>;
-                })}
-              </ul>
-            </li>
-          );
-        }
-        console.log(outputArray)
-        this.setState({ taskList: outputArray });
-        // let sortedList = list.sort((a, b) => a.priority - b.priority);
-        // this.setState({
-        //   taskList: groupedList.map((subList, priorityOrder) => {
-        //     return (
-        //       <ul key={priorityOrder}>
-        //         {subList.map((content, key) => {
-        //           return <Task details={content} key={key}></Task>;
-        //         })}
-        //       </ul> // could be Prority wrapper
-        //     );
-        //   }),
-        // });
+        this.setState({ taskList: sortTaskList(list) });
       })
       .finally(() => {
         this.setState({ loading: false });
