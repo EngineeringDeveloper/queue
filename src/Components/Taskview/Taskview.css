@@ -60,9 +60,10 @@ input {
 
 .Priority {
   padding: 10px;
-  border-color: var(--theme-foreground);
+  /* border-color: var(-colour); */
   border-width: 4px;
   border-radius: 50px;
   border-style: solid;
   margin-bottom: 10px;
+  
 }

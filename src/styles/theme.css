@@ -27,4 +27,17 @@
   --project: #6b2770;
   --context: #2b6251;
   --hashtag: #12c8ed;
+  --B: #f3722cff;
+  --C: #f8961eff;
+  --D: #f9844aff;
+  --E: #f9c74fff;
+  --F: #90be6dff;
+  --G: #43aa8bff;
+  --H: #4d908eff;
+  --I: #577590ff;
+  --J: #277da1ff;
+}
+
+.A {
+  border-color: #f94144ff;
 }
