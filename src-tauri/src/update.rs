@@ -13,22 +13,22 @@
 // use bytes::Buf;
 #![allow(dead_code)]
 
-const USER: &'static str = "EngineeringDeveloper";
-const REPO: &'static str = "queue";
+const USER: &str = "EngineeringDeveloper";
+const REPO: &str = "queue";
 
 
-pub fn checkUpdate() -> bool{
+pub fn check_update() -> bool{
     // Checks if there is a newer released than the one installed
     true
 }
 
-pub fn downloadUpdate() {
+pub fn download_update() {
     // called when checkUpdate == True
     // makes async request to github for the latest install file
     // How can we have load this latest version
 }
 
-pub fn installOnClose() {
+pub fn install_on_close() {
     // Function that is called on close of queue
     // calls some installer file to update the files after the program is not running
     // like vscode!
