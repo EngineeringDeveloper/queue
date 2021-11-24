@@ -59,11 +59,26 @@ input {
 }
 
 .Priority {
-  padding: 10px;
-  /* border-color: var(-colour); */
+  /* padding: 10px; */
+  border-color: var(--prio-border);
   border-width: 4px;
   border-radius: 50px;
   border-style: solid;
   margin-bottom: 10px;
-  
+}
+
+.Priority #title {
+  width: 100px;
+  height: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* text-align: center;
+  vertical-align: middle; */
+  font-size: x-large;
+  border-top-left-radius: 40px;
+  border-top-right-radius: 0;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 25px;
+  background-color: var(--prio-border);
 }

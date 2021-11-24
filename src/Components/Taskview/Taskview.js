@@ -28,10 +28,10 @@ function sortTaskList(taskList) {
   console.log(groupedMap)
   let outputArray = [];
   for (let [priorityOrder, subList] of groupedMap) {
-    let priority = priorityOrder < 26 ? (priorityOrder + 10).toString(36).toUpperCase() : "No Priority"
+    let prio = priorityOrder < 26 ? (priorityOrder + 10).toString(36).toUpperCase() : "None"
     outputArray.push(
-      <li className={`Priority ${priority}`} key={priorityOrder}>
-        <div>{priorityOrder < 26 ? (priorityOrder + 10).toString(36).toUpperCase() : "No Priority"}</div>
+      <li className={`Priority ${prio}`} key={priorityOrder}>
+        <div id="title" >{prio}</div>
         <ul>
           {subList.map((content, key) => {
             return <Task details={content} key={key}></Task>;
