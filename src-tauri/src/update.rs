@@ -3,6 +3,8 @@
 // this is then cached, and the exe is replaced on exit
 // The latest release is tested with the current version and the latest release on github
 
+// possibly use https://docs.rs/self_update/0.27.0/self_update/index.html
+
 // use reqwest::{Client};
 // use reqwest::header::USER_AGENT;
 // use serde_json;
