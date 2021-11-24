@@ -30,37 +30,41 @@ export default function Task(props) {
   const tags = objHasContent(props.details.tags)
     ? props.details.tags.toString()
     : "";
-
+  // console.log(props.details.projects)
   return (
     <li key={props.details.priority} className='Task'>
       <Checkbox></Checkbox>
-      <div>
-        {"subject :"}
-        <div>{props.details.subject}</div>
-      </div>
-
-      <div className='Project'>
-        {"Project :"}
-        <div>{props.details.projects}</div>
-      </div>
-
-      <div>
-        <div>{"date :" + props.details.create_date}</div>
-        <div>{"date_f :" + props.details.finish_date}</div>
-        <div>{"fin :" + props.details.finished}</div>
-        <div>{"due :" + props.details.due_date}</div>
-        <div className='Context'>
-          {"contexts :"}
-          <div>{props.details.contexts}</div>
+      <div style={{ padding: 0, display: "flex", flexFlow: "column" }}>
+        <div>
+          <Subject subject={props.details.subject} />
+          <Boxed array= {props.details.projects} cssClass="Project"/>
+          {/* <div className='Project Boxed'>{props.details.projects}</div> */}
+          <div className='Context Boxed'>{props.details.contexts}</div>
+          <div className='Hashtag Boxed'>{props.details.hashtags}</div>
+          <div>{tags}</div>
         </div>
-
-        <div className='Hashtag'>
-          {"hash :"}
-          <div>{props.details.hashtags}</div>
+        <div className='Dates'>
+          <div>{"date :" + props.details.create_date}</div>
+          <div>{"date_f :" + props.details.finish_date}</div>
+          {/* <div>{"fin :" + props.details.finished}</div> */}
+          <div>{"due :" + props.details.due_date}</div>
         </div>
-
-        <div>{tags}</div>
       </div>
     </li>
   );
+}
+
+const Subject = ({subject}) => {
+  return <div className='Subject'>{subject}</div>
+}
+
+const Boxed = ({ array, cssClass }) => {
+  console.log(array.length > 0)
+  if (array.length > 0) {
+    let list = array.map((value, key) => {
+    return (<li className={cssClass + " Boxed"} key={key}>{value}</li>)
+    })
+    return (<ul style={{display: "flex", flexFlow: "column"}}>{list}</ul>)
+  }
+  return null
 }

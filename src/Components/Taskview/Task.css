@@ -2,7 +2,7 @@
     display: flex;
     flex-flow: row;
     align-items:center;
-    padding: 10px;
+    /* padding: 10px; */
     width: 92%;
     /* border-width: 4px;
     border-radius: 4px;
@@ -11,14 +11,39 @@
     margin-bottom: 5px;
   }
 
+
+div:empty { display: none }
+
+.Boxed {
+    padding: 5px;
+    border-radius: 5px;
+    list-style-type: none;
+}
+
+.Subject{
+    float: left;
+}
+
 .Project {
     background-color: var(--project);
+    float: left;
+    margin: 10px;
 }
 
 .Context {
     background-color: var(--context);
+    float: left;
+    margin: 10px;
 }
 
 .Hashtag {
     background-color: var(--hashtag);
+    float: left;
+    margin: 10px;
+}
+
+.Dates {
+    display: flex;
+    flex-flow: row;
+    /* margin-left: auto; */
 }

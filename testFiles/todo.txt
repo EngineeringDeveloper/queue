@@ -23,13 +23,13 @@
 2021-11-08 java
 2021-11-08 script
 2021-11-08 is
-2021-11-08 becoming
+2021-11-08 becoming due:2021-11-25
 2021-11-08 a
 2021-11-08 more
 2021-11-08 readable
 2021-11-08 language
 x 2021-11-23 2021-11-23 Some
 x 2021-11-23 2021-11-23 are Completed with +Project @context
-(A) 2021-11-23 Priority
+(A) 2021-11-23 Priority #hashtag +priority +multiplePriortiy @context @othercont
 (B) 2021-11-23 next priority
 (C) 2021-11-23 other priorty with +Project @context
