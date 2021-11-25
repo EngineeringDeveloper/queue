@@ -1,4 +1,4 @@
-import React from "react";
+import { React, useState} from "react";
 import Checkbox from "@mui/material/Checkbox";
 import "./Task.css";
 
@@ -23,10 +23,14 @@ import "./Task.css";
 // }
 
 export default function Task(props) {
-  let finished = props.details.finished
+  const [checked, setChecked] = useState(props.details.finished);
+  const handleChange = () => {
+    props.details.finished = !checked
+    setChecked(!checked)
+  }
   return (
-    <li key={props.details.priority} className={'Task ' + finished}>
-      <Checkbox checked={finished}></Checkbox>
+    <li key={props.details.priority} className={'Task ' + checked}>
+      <Checkbox checked={checked} onChange={handleChange}></Checkbox>
       <div style={{ padding: 0, display: "flex", flexFlow: "column" }}>
         <Subject subject={props.details.subject} />
         <div style={{ padding: 0, display: "flex", flexFlow: "row" }}>
