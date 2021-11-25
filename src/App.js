@@ -25,7 +25,7 @@ import NewToDoModal from './Components/NewToDoModal/NewToDoModal'
 // Tauri Commands
 // https://tauri.studio/en/docs/usage/guides/command
 // With the Tauri API npm package:
-// import { invoke } from '@tauri-apps/api/tauri'
+import { invoke } from '@tauri-apps/api/tauri'
 // With the Tauri global script, enabled when `tauri.conf.json > build > withGlobalTauri` is set to true:
 
 
@@ -35,7 +35,7 @@ function App() {
   // const invoke =  window.__TAURI__.invoke
   // const themeMode = theme === 'light' ? lightTheme : darkTheme;
   // const log = 
-
+  invoke("my_custom_command")
   if (!mountedComponent) return <div />
   
   return (

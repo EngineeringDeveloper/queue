@@ -1,19 +1,9 @@
 use todo_txt::Task;
 use std::{fs, io::{self, BufRead}, str::FromStr, iter::FromIterator};
 
-struct AppState {
-    todo_list: Vec<LoadedTodo>
-}
-
-impl AppState {
-    fn from_path() {
-        // opens the config file and loads upp the app state from it
-    }
-}
-
-struct LoadedTodo {
-    path: String,
-    task_vec: Vec<Task>,
+pub struct LoadedTodo {
+    pub path: String,
+    pub task_vec: Vec<Task>,
 }
 
 impl LoadedTodo {

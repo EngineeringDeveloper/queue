@@ -25,7 +25,6 @@ function groupBy(list, keyGetter) {
 function sortTaskList(taskList) {
   // Creates a Priority grouped and sorted list of the task list
   let groupedMap = groupBy(taskList, (obj) => obj.priority);
-  console.log(groupedMap)
   let outputArray = [];
   for (let [priorityOrder, subList] of groupedMap) {
     let prio = priorityOrder < 26 ? (priorityOrder + 10).toString(36).toUpperCase() : "None"

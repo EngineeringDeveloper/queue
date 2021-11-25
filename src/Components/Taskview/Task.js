@@ -55,7 +55,6 @@ const Subject = ({ subject }) => {
 };
 
 const Boxed = ({ array, cssClass }) => {
-  console.log(array.length > 0);
   if (array.length > 0) {
     let list = array.map((value, key) => {
       return (
