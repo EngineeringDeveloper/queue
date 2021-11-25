@@ -38,6 +38,7 @@ pub fn get_local_config() -> File {
 }
 
 pub fn save_local_config(config: Config) -> Result<(), std::io::Error> {
+    // TODO Error handeling
     let mut file = get_local_config();
     file.write_all(serde_json::to_string(&config).unwrap().as_bytes())
 }
