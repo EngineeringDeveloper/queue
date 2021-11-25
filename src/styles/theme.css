@@ -1,5 +1,6 @@
 .light {
   --theme-background: #FFFFFF; /* Main Background */
+  --theme-dimmed : #A5A5A5; /* not selected text*/ 
   --theme-text: #4A4A4A; /* text */
   --theme-text-notselected: #A5A5A5; /* not selected text*/ 
   --theme-text-clickable: #4273DD; /* clickable text */
@@ -13,6 +14,7 @@
 /* https://coolors.co/006466-065a60-0b525b-144552-1b3a4b-212f45-272640-312244-3e1f47-4d194d */
 .dark {
   --theme-background: #212224; /* Main Background */
+  --theme-dimmed: #6C6C6C; /* not selected text*/ 
   --theme-text: #ffffff; /* text */
   --theme-text-notselected: #6C6C6C; /* not selected text*/ 
   --theme-text-clickable: #F0F0F0; /* clickable text */

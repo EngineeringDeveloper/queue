@@ -2,10 +2,6 @@ import React from "react";
 import Checkbox from "@mui/material/Checkbox";
 import "./Task.css";
 
-function objHasContent(obj) {
-  for (var i in obj) return true;
-  return false;
-}
 // pub struct Simple {
 //     pub subject: String,
 //     #[cfg_attr(feature = "serde-support", serde(default = "Priority::lowest"))]
@@ -27,21 +23,17 @@ function objHasContent(obj) {
 // }
 
 export default function Task(props) {
-  const tags = objHasContent(props.details.tags)
-    ? props.details.tags.toString()
-    : "";
-  // console.log(props.details.projects)
+  let finished = props.details.finished
   return (
-    <li key={props.details.priority} className='Task'>
-      <Checkbox></Checkbox>
+    <li key={props.details.priority} className={'Task ' + finished}>
+      <Checkbox checked={finished}></Checkbox>
       <div style={{ padding: 0, display: "flex", flexFlow: "column" }}>
-        <div>
-          <Subject subject={props.details.subject} />
-          <Boxed array= {props.details.projects} cssClass="Project"/>
-          {/* <div className='Project Boxed'>{props.details.projects}</div> */}
-          <div className='Context Boxed'>{props.details.contexts}</div>
-          <div className='Hashtag Boxed'>{props.details.hashtags}</div>
-          <div>{tags}</div>
+        <Subject subject={props.details.subject} />
+        <div style={{ padding: 0, display: "flex", flexFlow: "row" }}>
+          <Boxed array={props.details.projects} cssClass='Project' />
+          <Boxed array={props.details.contexts} cssClass='Context' />
+          <Boxed array = {props.details.hashtags} cssClass="Hashtag"/>
+          <Boxed array = {props.details.tags} cssClass="Tag"/>
         </div>
         <div className='Dates'>
           <div>{"date :" + props.details.create_date}</div>
@@ -54,17 +46,21 @@ export default function Task(props) {
   );
 }
 
-const Subject = ({subject}) => {
-  return <div className='Subject'>{subject}</div>
-}
+const Subject = ({ subject }) => {
+  return <div className='Subject'>{subject}</div>;
+};
 
 const Boxed = ({ array, cssClass }) => {
-  console.log(array.length > 0)
+  console.log(array.length > 0);
   if (array.length > 0) {
     let list = array.map((value, key) => {
-    return (<li className={cssClass + " Boxed"} key={key}>{value}</li>)
-    })
-    return (<ul style={{display: "flex", flexFlow: "column"}}>{list}</ul>)
+      return (
+        <div className={cssClass + " Boxed"} key={key}>
+          {value}
+        </div>
+      );
+    });
+    return <div style={{ display: "flex" }}>{list}</div>;
   }
-  return null
-}
+  return null;
+};
