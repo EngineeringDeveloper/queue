@@ -1,6 +1,32 @@
 use todo_txt::Task;
 use std::{fs, io::{self, BufRead}, str::FromStr, iter::FromIterator};
 
+struct AppState {
+    todo_list: Vec<LoadedTodo>
+}
+
+impl AppState {
+    fn from_file() {
+        // opens the config file and loads upp the app state from it
+    }
+}
+
+struct LoadedTodo {
+    path: String,
+    task_vec: Vec<Task>,
+}
+
+impl LoadedTodo {
+
+    fn from_string(path: &str) -> LoadedTodo {
+        LoadedTodo {
+            path,
+            task_vec: parse_todo(path)
+        }
+    }
+    
+}
+
 
 #[tauri::command]
 pub fn parse_todo(path: &str) -> Vec<Task>{
