@@ -6,7 +6,7 @@ struct AppState {
 }
 
 impl AppState {
-    fn from_file() {
+    fn from_path() {
         // opens the config file and loads upp the app state from it
     }
 }
@@ -18,10 +18,10 @@ struct LoadedTodo {
 
 impl LoadedTodo {
 
-    fn from_string(path: &str) -> LoadedTodo {
+    fn from_path(path: &str) -> LoadedTodo {
         LoadedTodo {
-            path,
-            task_vec: parse_todo(path)
+            path: String::from(path),
+            task_vec: parse_todo(path),
         }
     }
     
