@@ -1,6 +1,6 @@
 use directories::ProjectDirs;
 use serde::{Serialize, Deserialize};
-use serde_json;
+use serde_json::de;
 
 
 // import for writing files
@@ -19,7 +19,7 @@ pub struct Config {
 
 
 /// get the local config location
-pub fn get_local_config() -> File {
+fn get_local_config() -> File {
     // TODO Error handeling
     let project_dir = ProjectDirs::from("", AUTHOR, NAME)
     .unwrap();
@@ -46,4 +46,9 @@ pub fn save_local_config(config: Config) -> Result<(), std::io::Error> {
     // TODO Error handeling
     let mut file = get_local_config();
     file.write_all(serde_json::to_string(&config).unwrap().as_bytes())
+}
+
+pub fn load_local_config() -> Config {
+    // TODO Error handeling
+    de::from_reader(get_local_config()).unwrap()
 }

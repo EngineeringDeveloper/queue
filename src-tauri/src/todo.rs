@@ -7,14 +7,12 @@ pub struct LoadedTodo {
 }
 
 impl LoadedTodo {
-
-    fn from_path(path: &str) -> LoadedTodo {
+    pub fn from_path(path: &str) -> LoadedTodo {
         LoadedTodo {
             path: String::from(path),
             task_vec: parse_todo(path),
         }
-    }
-    
+    }  
 }
 
 

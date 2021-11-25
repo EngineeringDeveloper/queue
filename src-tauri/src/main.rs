@@ -16,8 +16,9 @@ fn main() {
     todo_txt_vec: vec!["TEST".into()]
   });
   tauri::Builder::default()
-    .manage(AppState::get_local_state())
+    .manage(AppState::read_local_state()) // gets ran on startup
     .invoke_handler(tauri::generate_handler![print_from_rust, parse_todo, my_custom_command])
+    // TODO also need to run a save function on window close
     .run(tauri::generate_context!())
     .expect("error while running tauri application");
 }
@@ -29,19 +30,14 @@ struct AppState {
 
 impl AppState {
   fn read_local_state() -> AppState {
+    let config = localStorage::load_local_config();
 
     AppState{
-      todo_list: vec![LoadedTodo {
-        path: "Path".into(),
-        task_vec: vec![Task::from_str("Test").unwrap()]
-      }]
+      todo_list: config.todo_txt_vec.into_iter().map(|path| {
+      LoadedTodo::from_path(&path)
+    }).collect()
     }
   }
-  
-  fn from_path(path: &str) {
-      // opens the config file and loads upp the app state from it
-  }
-
 }
 
 // Example Tauri command
