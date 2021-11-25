@@ -28,7 +28,7 @@ struct AppState {
 }
 
 impl AppState {
-  fn get_local_state() -> AppState {
+  fn read_local_state() -> AppState {
 
     AppState{
       todo_list: vec![LoadedTodo {

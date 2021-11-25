@@ -32,7 +32,12 @@ pub fn get_local_config() -> File {
             Err(_) => {
                 // file does not exist
                 println!("{}", &path.to_str().unwrap());
-                File::create(&path).unwrap()
+                let file = File::create(&path).unwrap();
+                // save empty config
+                save_local_config(Config{
+                    todo_txt_vec: vec!["".into()]
+                });
+                file
             }
         }
 }
