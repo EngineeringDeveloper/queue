@@ -2,6 +2,9 @@ import { React, useState} from "react";
 import Checkbox from "@mui/material/Checkbox";
 import "./Task.css";
 
+import { invoke } from '@tauri-apps/api/tauri'
+
+
 // pub struct Simple {
 //     pub subject: String,
 //     #[cfg_attr(feature = "serde-support", serde(default = "Priority::lowest"))]
@@ -23,13 +26,15 @@ import "./Task.css";
 // }
 
 export default function Task(props) {
+  console.log(props.index)
   const [checked, setChecked] = useState(props.details.finished);
   const handleChange = () => {
     props.details.finished = !checked
+    invoke("recieve_task", {task: props.details, index: props.index})
     setChecked(!checked)
   }
   return (
-    <li key={props.details.priority} className={'Task ' + checked}>
+    <li key={props.index} className={'Task ' + checked}>
       <Checkbox checked={checked} onChange={handleChange}></Checkbox>
       <div style={{ padding: 0, display: "flex", flexFlow: "column" }}>
         <Subject subject={props.details.subject} />

@@ -22,7 +22,7 @@ function groupBy(list, keyGetter) {
   return sortedMap;
 }
 
-function sortTaskList(taskList) {
+function genTaskListComponents(taskList) {
   // Creates a Priority grouped and sorted list of the task list
   let groupedMap = groupBy(taskList, (obj) => obj.priority);
   let outputArray = [];
@@ -32,8 +32,9 @@ function sortTaskList(taskList) {
       <li className={`Priority ${prio}`} key={priorityOrder}>
         <div id="title" >{prio}</div>
         <ul>
-          {subList.map((content, key) => {
-            return <Task details={content} key={key}></Task>;
+          {subList.map((content, index) => {
+            // console.log(index)
+            return <Task details={content} index={index}></Task>;
           })}
         </ul>
       </li>
@@ -45,7 +46,6 @@ function sortTaskList(taskList) {
 class Taskview extends Component {
   constructor(props) {
     super(props);
-    console.log(props)
     this.state = {
       input: "",
       taskList: props.taskList,
@@ -58,8 +58,7 @@ class Taskview extends Component {
     // If the component mounted then we evaluate if the promise resolved
     this.state.taskList
       .then((list) => {
-
-        this.setState({ taskList: sortTaskList(list) });
+        this.setState({ taskList: genTaskListComponents(list) });
       })
       .finally(() => {
         this.setState({ loading: false });
