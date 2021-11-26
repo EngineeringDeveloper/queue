@@ -7,14 +7,15 @@ mod local_storage;
 mod todo;
 mod update;
 
-use todo::{parse_todo, LoadedTodo};
+use todo::{read_todo, LoadedTodo};
 use todo_txt::Task;
+use std::collections::HashMap;
 
 fn main() {
   tauri::Builder::default()
     .manage(AppState::read_local_state()) // gets ran on startup loads local state
     .invoke_handler(tauri::generate_handler![
-      parse_todo,
+      read_todo,
       get_todo,
       todo_list_length,
       recieve_task
@@ -48,17 +49,18 @@ fn todo_list_length(state: tauri::State<AppState>) -> usize {
 }
 
 #[tauri::command]
-fn get_todo(state: tauri::State<AppState>, index: usize) -> Vec<Task> {
-  state.todo_list[index].task_vec.clone()
+fn get_todo(state: tauri::State<AppState>, index: usize) -> HashMap<u8, Vec<Task>> {
+  state.todo_list[index].todo_hash.clone()
 }
 
 #[tauri::command]
-fn recieve_task(state: tauri::State<AppState>, task: Task, index: usize) {
-  println!("{} {} {}", task, index, state.todo_list[0].task_vec[index])
+fn recieve_task(state: tauri::State<AppState>, task: Task, index: u8) {
+  println!("{} {} {:?}", task, index, state.todo_list[0].todo_hash[&index])
+  
 }
 
-#[tauri::command]
-async fn my_custom_command(window: tauri::Window) {
-  window.eval("console.log(local_storage)");
-  println!("Window: {}", window.label());
-}
+// #[tauri::command]
+// async fn my_custom_command(window: tauri::Window) {
+//   window.eval("console.log(local_storage)");
+//   println!("Window: {}", window.label());
+// }
