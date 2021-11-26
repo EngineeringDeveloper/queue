@@ -12,12 +12,9 @@ use todo_txt::Task;
 use std::str::FromStr;
 
 fn main() {
-  localStorage::save_local_config(localStorage::Config{
-    todo_txt_vec: vec!["TEST".into()]
-  });
   tauri::Builder::default()
-    .manage(AppState::read_local_state()) // gets ran on startup
-    .invoke_handler(tauri::generate_handler![print_from_rust, parse_todo, my_custom_command])
+    .manage(AppState::read_local_state()) // gets ran on startup loads local state
+    .invoke_handler(tauri::generate_handler![parse_todo, todo_list_length])
     // TODO also need to run a save function on window close
     .run(tauri::generate_context!())
     .expect("error while running tauri application");
@@ -38,13 +35,19 @@ impl AppState {
     }).collect()
     }
   }
+
 }
 
-// Example Tauri command
 #[tauri::command]
-fn print_from_rust() {
-  println!("I was generated in Rust!");
+fn todo_list_length(state: tauri::State<AppState>) -> usize {
+  state.todo_list.len()
 }
+
+#[tauri::command]
+fn get_todo(state: tauri::State<AppState>, index: usize) -> Vec<Task> {
+  state.todo_list[index].task_vec.clone()
+}
+
 
 #[tauri::command]
 async fn my_custom_command(window: tauri::Window) {

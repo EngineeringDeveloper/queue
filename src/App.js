@@ -35,7 +35,9 @@ function App() {
   // const invoke =  window.__TAURI__.invoke
   // const themeMode = theme === 'light' ? lightTheme : darkTheme;
   // const log = 
-  invoke("my_custom_command")
+  const todoTabCount = invoke("todo_list_length");
+  console.log()
+  const todo_text = invoke("get_todo", { "index" : 0})
   if (!mountedComponent) return <div />
   
   return (
@@ -43,7 +45,7 @@ function App() {
         <div className="Row">
           <Sidebar theme={theme} toggleTheme={themeToggler} />
           <NewToDoModal />
-          <Taskview />
+          <Taskview task={todo_text} />
         </div>
         </div>
     )
