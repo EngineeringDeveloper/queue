@@ -45,7 +45,7 @@ function App() {
         <div className="Row">
           <Sidebar theme={theme} toggleTheme={themeToggler} />
           <NewToDoModal />
-          <Taskview task={todo_text} />
+          <Taskview taskList={todo_text} />
         </div>
         </div>
     )

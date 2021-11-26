@@ -45,11 +45,10 @@ function sortTaskList(taskList) {
 class Taskview extends Component {
   constructor(props) {
     super(props);
+    console.log(props)
     this.state = {
       input: "",
-      taskList: invoke("parse_todo", {
-        path: "C:\\Users\\ryanc\\Documents\\Repositories\\queue\\testFiles\\todo.txt",
-      }),
+      taskList: props.taskList,
       error: null,
       loading: true,
     };
@@ -59,6 +58,7 @@ class Taskview extends Component {
     // If the component mounted then we evaluate if the promise resolved
     this.state.taskList
       .then((list) => {
+
         this.setState({ taskList: sortTaskList(list) });
       })
       .finally(() => {

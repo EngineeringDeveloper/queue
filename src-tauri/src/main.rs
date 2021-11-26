@@ -5,16 +5,15 @@
 
 mod todo;
 mod update;
-mod localStorage;
+mod local_storage;
 
 use todo::{parse_todo, LoadedTodo,};
 use todo_txt::Task;
-use std::str::FromStr;
 
 fn main() {
   tauri::Builder::default()
     .manage(AppState::read_local_state()) // gets ran on startup loads local state
-    .invoke_handler(tauri::generate_handler![parse_todo, todo_list_length])
+    .invoke_handler(tauri::generate_handler![parse_todo, get_todo, todo_list_length])
     // TODO also need to run a save function on window close
     .run(tauri::generate_context!())
     .expect("error while running tauri application");
@@ -27,7 +26,7 @@ struct AppState {
 
 impl AppState {
   fn read_local_state() -> AppState {
-    let config = localStorage::load_local_config();
+    let config = local_storage::load_local_config();
 
     AppState{
       todo_list: config.todo_txt_vec.into_iter().map(|path| {
@@ -51,6 +50,6 @@ fn get_todo(state: tauri::State<AppState>, index: usize) -> Vec<Task> {
 
 #[tauri::command]
 async fn my_custom_command(window: tauri::Window) {
-  window.eval("console.log(localStorage)");
+  window.eval("console.log(local_storage)");
   println!("Window: {}", window.label());
 }
