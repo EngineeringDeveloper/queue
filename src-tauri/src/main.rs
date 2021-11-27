@@ -10,6 +10,8 @@ mod update;
 use todo::{read_todo, LoadedTodo};
 use todo_txt::Task;
 use std::collections::HashMap;
+use todo_lib;
+
 
 fn main() {
   tauri::Builder::default()
