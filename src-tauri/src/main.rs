@@ -55,7 +55,14 @@ fn get_todo(state: tauri::State<AppState>, index: usize) -> HashMap<u8, Vec<Task
 
 #[tauri::command]
 fn recieve_task(state: tauri::State<AppState>, task: Task, index: usize) {
-  println!("{}/n/n{:?}", index, state.todo_list[0].todo_hash[&task.priority][index])
+  let mut todo = &state.todo_list[0];
+  let ident_task = &todo.todo_hash[&task.priority][index];
+  println!("{}/n/n{:?}", index, ident_task);
+  
+  // change the task to the returned task
+  todo.todo_hash[&task.priority][index] = task;
+  // Write the changed to the file
+  todo.clone().write();
 }
 
 // #[tauri::command]

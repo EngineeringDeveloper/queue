@@ -7,6 +7,7 @@ use std::{
 };
 use todo_txt::Task;
 
+#[derive(Clone)]
 pub struct LoadedTodo {
   pub path: String,
   pub todo_hash: HashMap<u8, Vec<Task>>, // hashmap with keys as priorty and content vector of tasks
