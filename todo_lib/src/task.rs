@@ -3,17 +3,18 @@
 /// 
 
 use serde::{Serialize, Deserialize};
+use crate::Date;
 
 
 #[derive(Copy, Clone, Serialize, Deserialize, Debug)]
 pub struct Task {
     pub subject: String,
     pub priority: u8,
-    pub create_date: Option<crate::Date>,
-    pub finish_date: Option<crate::Date>,
+    pub create_date: Option<Date>,
+    pub finish_date: Option<Date>,
     pub finished: bool,
-    pub threshold_date: Option<crate::Date>,
-    pub due_date: Option<crate::Date>,
+    pub threshold_date: Option<Date>,
+    pub due_date: Option<Date>,
     pub contexts: Vec<String>,
     pub projects: Vec<String>,
     pub hashtags: Vec<String>,
