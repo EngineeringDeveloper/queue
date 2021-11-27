@@ -8,7 +8,10 @@ GUI Application for task and Job planning with priority consideration
 
 </div>
 
-Written in JavaScript with an React end & a back end in Rust via Tauri
+Written in JavaScript with an React end & a back end in Rust via Tauri  
+  
+Uses as a base the "todo.txt" syntax  
+![todo.txt](.\images\todotxt_explainer.svg)
 
 ## References:  
 https://github.com/todotxt/todo.txt  
