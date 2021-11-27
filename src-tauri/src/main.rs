@@ -54,9 +54,8 @@ fn get_todo(state: tauri::State<AppState>, index: usize) -> HashMap<u8, Vec<Task
 }
 
 #[tauri::command]
-fn recieve_task(state: tauri::State<AppState>, task: Task, index: u8) {
-  println!("{} {} {:?}", task, index, state.todo_list[0].todo_hash[&index])
-  
+fn recieve_task(state: tauri::State<AppState>, task: Task, index: usize) {
+  println!("{}/n/n{:?}", index, state.todo_list[0].todo_hash[&task.priority][index])
 }
 
 // #[tauri::command]

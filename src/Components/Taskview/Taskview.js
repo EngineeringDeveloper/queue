@@ -6,41 +6,67 @@ import CircularProgress from "@mui/material/CircularProgress";
 // https://mui.com/components/progress/
 import { invoke } from "@tauri-apps/api/tauri";
 
-// js function for grouping by an internal json value
-function groupBy(list, keyGetter) {
-  const map = new Map();
-  list.forEach((item) => {
-    const key = keyGetter(item);
-    const collection = map.get(key);
-    if (!collection) {
-      map.set(key, [item]);
-    } else {
-      collection.push(item);
-    }
-  });
-  const sortedMap = new Map([...map.entries()].sort());
-  return sortedMap;
-}
+// // js function for grouping by an internal json value
+// function groupBy(list, keyGetter) {
+//   const map = new Map();
+//   list.forEach((item) => {
+//     const key = keyGetter(item);
+//     const collection = map.get(key);
+//     if (!collection) {
+//       map.set(key, [item]);
+//     } else {
+//       collection.push(item);
+//     }
+//   });
+//   const sortedMap = new Map([...map.entries()].sort());
+//   return sortedMap;
+// }
 
 function genTaskListComponents(taskList) {
   // Creates a Priority grouped and sorted list of the task list
-  let groupedMap = groupBy(taskList, (obj) => obj.priority);
+  // let groupedMap = groupBy(taskList, (obj) => obj.priority);
   let outputArray = [];
-  for (let [priorityOrder, subList] of groupedMap) {
-    let prio = priorityOrder < 26 ? (priorityOrder + 10).toString(36).toUpperCase() : "None"
-    outputArray.push(
-      <li className={`Priority ${prio}`} key={priorityOrder}>
-        <div id="title" >{prio}</div>
-        <ul>
-          {subList.map((content, index) => {
-            // console.log(index)
-            return <Task details={content} index={index}></Task>;
-          })}
-        </ul>
-      </li>
-    );
+  for (let priority in taskList) {
+    if (taskList.hasOwnProperty(priority)) {
+      const taskVec = taskList[priority];
+      priority = parseInt(priority);
+      let prioritryLetter =
+        priority < 26 ? (priority + 10).toString(36).toUpperCase() : "None";
+      outputArray.push(
+        <li className={`Priority ${prioritryLetter}`} key={priority}>
+          <div id='title'>{prioritryLetter}</div>
+          <ul>
+            {taskVec.map((content, index) => {
+              return <Task details={content} index={index}></Task>;
+            })}
+          </ul>
+        </li>
+      );
+    }
   }
-  return outputArray
+
+  console.log(outputArray);
+  return outputArray;
+
+  // let outputArray = [];
+  // for (let [priorityOrder, subList] of groupedMap) {
+  //   let prio =
+  //     priorityOrder < 26
+  //       ? (priorityOrder + 10).toString(36).toUpperCase()
+  //       : "None";
+  //   outputArray.push(
+  //     <li className={`Priority ${prio}`} key={priorityOrder}>
+  //       <div id='title'>{prio}</div>
+  //       <ul>
+  //         {subList.map((content, index) => {
+  //           // console.log(index)
+  //           return <Task details={content} index={index}></Task>;
+  //         })}
+  //       </ul>
+  //     </li>
+  //   );
+  // }
+  // return outputArray;
 }
 
 class Taskview extends Component {
