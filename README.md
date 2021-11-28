@@ -1,4 +1,8 @@
+
 # Queue
+<div align="center">
+![Queue](/images/Queue_icon.svg)
+</div>
 GUI Application for task and Job planning with priority consideration
 
 <div align="center">
