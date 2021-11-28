@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub const PROJECT_TAG: &str = "+"; // project marker
 pub const CONTEXT_TAG: &str = "@"; // context marker
 pub const HASH_TAG: &str = "#"; // hashtag marker
-// pub const NO_PRIORITY: u8 = 26; // the 26th letter of the alphabet
+pub const NO_PRIORITY: u8 = 26; // the 26th letter of the alphabet
 // pub const DUE_TAG: &str = "due"; // Due by
 // pub const THR_TAG: &str = "t"; // Threshold or Start date
 // pub const REC_TAG: &str = "rec"; // Reoccurence tag
@@ -117,7 +117,7 @@ pub fn days_in_month(y: u32, m: u32) -> u32 {
 
 pub fn try_read_date(input: &str) -> Option<Date> {
     // if there are 2 dashes in the 10 char length then we espect a date
-    let target = String::from_utf8_lossy(&input.as_bytes()[..11]);
+    let target = String::from_utf8_lossy(&input.as_bytes()[..10]);
     if target.matches("-").count() == 2 {
         let mut values = vec![];
         for section in target.split("-") {
