@@ -19,7 +19,7 @@ pub struct TaskList {
 }
 
 impl TaskList {
-    fn from_file(path: &str) -> Result<TaskList, io::Error> {
+    pub fn from_file(path: &str) -> Result<TaskList, io::Error> {
         let mut todofile = fs::File::open(path)?;
         let mut contents = String::new();
         todofile.read_to_string(&mut contents)?;

@@ -2,7 +2,7 @@
 use pretty_assertions::{assert_eq, assert_ne};
 
 use std::{ str::FromStr};
-use crate::{utils::Recurrence, Date, Task};
+use crate::{utils::Recurrence, Date, Task, TaskList};
 
 #[test]
 fn generate_task_from_str() {
@@ -72,5 +72,13 @@ fn generate_task_from_str() {
     expected.projects.sort();
     expected.contexts.sort();
     expected.hashtags.sort();
+    let input = "x (A) 2021-11-25 2021-11-23 +multiplePriority rec:0d @context resp:YOU Task Subject #hashtag +priority @othercont cre:ME due:2021-11-27";
     assert_eq!(expected, Task::from_str(input).unwrap());
+}
+
+
+#[test]
+fn generate_task_list_from_path() {
+    let path = "../testFiles/todo.txt";
+    TaskList::from_file(path).unwrap();
 }
