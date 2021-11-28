@@ -1,7 +1,7 @@
 
 mod task;
 mod taskList;
-mod parser;
+mod utils;
 
 #[cfg(test)]
 mod tests;
