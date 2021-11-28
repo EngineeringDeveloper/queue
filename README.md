@@ -1,8 +1,9 @@
 
 # Queue
 <div align="center">
-![Queue](/images/Queue_icon.svg)
+<img src = "images/Queue_icon.svg"  alt = "Queue"/>
 </div>
+
 GUI Application for task and Job planning with priority consideration
 
 <div align="center">
