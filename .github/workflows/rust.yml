@@ -36,6 +36,6 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - run: rustup component add clippy
-    - run: cargo clippy check
+    - run: cargo clippy
 
   
