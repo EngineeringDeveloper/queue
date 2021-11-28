@@ -149,6 +149,11 @@ impl Task {
                 // this word is content of the subject
             }
         }
+        // sort all the vectors
+        task.projects.sort();
+        task.contexts.sort();
+        task.hashtags.sort();
+
         // the subject is the remaining text
         task.subject = working_string.trim().to_owned();
 
