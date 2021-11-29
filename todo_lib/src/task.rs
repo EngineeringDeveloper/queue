@@ -22,12 +22,12 @@ impl Priority {
 
 #[derive(Clone, Serialize, Deserialize, Debug, Eq, PartialEq, Ord, PartialOrd)]
 pub struct Task {
-    pub subject: String,
     pub priority: u8,
+    pub finish_date: Option<Date>,
+    pub create_date: Option<Date>,
+    pub subject: String,
     pub created_by: Option<String>,
     pub assigned_to: Option<String>,
-    pub create_date: Option<Date>,
-    pub finish_date: Option<Date>,
     pub finished: bool,
     // pub threshold_date: Option<Date>,
     pub due_date: Option<Date>,

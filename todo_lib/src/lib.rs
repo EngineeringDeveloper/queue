@@ -1,15 +1,15 @@
 
-mod task;
-mod taskList;
+pub mod task;
+pub mod task_list;
 mod utils;
 
 #[cfg(test)]
 mod tests;
 
 // Task struct is directly accessable from the library
-use task::Task;
+pub use task::Task;
 // So is the TaskList Struct
-use taskList::TaskList;
+pub use task_list::TaskList;
 
 // Globally use Date
 use chrono::NaiveDate as Date;

@@ -4,22 +4,21 @@
 )]
 
 mod local_storage;
-mod todo;
+// mod todo;
 mod update;
 
-use todo::{read_todo, LoadedTodo};
-use todo_txt::Task;
+// use todo::{read_todo, LoadedTodo};
 use std::collections::HashMap;
+use std::sync::Mutex;
 use todo_lib;
-
+use todo_txt::Task;
 
 fn main() {
   tauri::Builder::default()
     .manage(AppState::read_local_state()) // gets ran on startup loads local state
     .invoke_handler(tauri::generate_handler![
-      read_todo,
+      get_all_loaded_todo,
       get_todo,
-      todo_list_length,
       recieve_task
     ])
     // TODO also need to run a save function on window close
@@ -28,7 +27,8 @@ fn main() {
 }
 
 struct AppState {
-  todo_list: Vec<LoadedTodo>,
+  // list of the todolists loaded, String key is the path to that list on disk
+  loaded_todo_lists: Mutex<HashMap<String, todo_lib::TaskList>>,
 }
 
 impl AppState {
@@ -36,35 +36,70 @@ impl AppState {
     let config = local_storage::load_local_config();
 
     AppState {
-      todo_list: config
-        .todo_txt_vec
-        .into_iter()
-        .map(|path| LoadedTodo::from_path(&path))
-        .collect(),
+      loaded_todo_lists: Mutex::new(
+        config
+          .todo_txt_vec
+          .into_iter()
+          .filter_map(|path| {
+            // todo_lib::from_file will create the file if it did not exist
+            let task_list_result = todo_lib::TaskList::from_file(&path);
+            match task_list_result {
+              Ok(task_list) => Some((path, task_list)),
+              Err(_) => None,
+            }
+          })
+          .collect::<HashMap<String, todo_lib::TaskList>>(),
+      ),
     }
   }
 }
 
 #[tauri::command]
-fn todo_list_length(state: tauri::State<AppState>) -> usize {
-  state.todo_list.len()
+fn get_all_loaded_todo(state: tauri::State<AppState>) -> HashMap<String, todo_lib::TaskList> {
+  let mut locked_loaded_todo_lists = state
+    .loaded_todo_lists
+    .lock()
+    .expect("Who is the othe user?");
+
+  locked_loaded_todo_lists
+}
+
+// #[tauri::command]
+// fn todo_list_length(state: tauri::State<AppState>) -> usize {
+//   let locked_loaded_todo_lists = state
+//     .loaded_todo_lists
+//     .lock()
+//     .expect("Who is the othe user?");
+//     locked_loaded_todo_lists.len()
+// }
+
+#[tauri::command]
+fn get_todo(state: tauri::State<AppState>, source: String) -> todo_lib::TaskList {
+  let mut locked_loaded_todo_lists = state
+    .loaded_todo_lists
+    .lock()
+    .expect("Who is the othe user?");
+  if !locked_loaded_todo_lists.contains_key(&source) {
+    let new_tasklist = todo_lib::TaskList {
+      source: source.clone(),
+      tasks: vec![],
+    };
+    // insert this loaded todo to this hashmap
+    locked_loaded_todo_lists.insert(new_tasklist.source.clone(), new_tasklist);
+  }
+  locked_loaded_todo_lists[&source].clone()
 }
 
 #[tauri::command]
-fn get_todo(state: tauri::State<AppState>, index: usize) -> HashMap<u8, Vec<Task>> {
-  state.todo_list[index].todo_hash.clone()
-}
+fn recieve_task(state: tauri::State<AppState>, task: Task, source: String, identifier: String) {
+  println!("{}/n{}/n{}", task, source, identifier);
+  // let mut todo = &state.loaded_todo_lists[0];
+  // let ident_task = &todo.todo_hash[&task.priority][index];
 
-#[tauri::command]
-fn recieve_task(state: tauri::State<AppState>, task: Task, index: usize) {
-  let mut todo = &state.todo_list[0];
-  let ident_task = &todo.todo_hash[&task.priority][index];
-  println!("{}/n/n{:?}", index, ident_task);
-  
-  // change the task to the returned task
-  todo.todo_hash[&task.priority][index] = task;
-  // Write the changed to the file
-  todo.clone().write();
+  // // change the task to the returned task
+  // todo.todo_hash[&task.priority][index] = task;
+  // // Write the changed to the file
+  // todo.clone().write();
 }
 
 // #[tauri::command]
