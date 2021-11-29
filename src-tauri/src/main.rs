@@ -10,8 +10,7 @@ mod update;
 // use todo::{read_todo, LoadedTodo};
 use std::collections::HashMap;
 use std::sync::Mutex;
-use todo_lib;
-use todo_txt::Task;
+
 
 fn main() {
   tauri::Builder::default()
@@ -61,7 +60,7 @@ fn get_all_loaded_todo(state: tauri::State<AppState>) -> HashMap<String, todo_li
     .lock()
     .expect("Who is the othe user?");
 
-  locked_loaded_todo_lists
+  locked_loaded_todo_lists.clone()
 }
 
 // #[tauri::command]
@@ -91,7 +90,7 @@ fn get_todo(state: tauri::State<AppState>, source: String) -> todo_lib::TaskList
 }
 
 #[tauri::command]
-fn recieve_task(state: tauri::State<AppState>, task: Task, source: String, identifier: String) {
+fn recieve_task(state: tauri::State<AppState>, task: todo_lib::Task, source: String, identifier: String) {
   println!("{}/n{}/n{}", task, source, identifier);
   // let mut todo = &state.loaded_todo_lists[0];
   // let ident_task = &todo.todo_hash[&task.priority][index];
