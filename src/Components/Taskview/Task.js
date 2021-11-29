@@ -5,26 +5,6 @@ import "./Task.css";
 import { invoke } from '@tauri-apps/api/tauri'
 
 
-// pub struct Simple {
-//     pub subject: String,
-//     #[cfg_attr(feature = "serde-support", serde(default = "Priority::lowest"))]
-//     pub priority: u8,
-//     pub create_date: Option<crate::Date>,
-//     pub finish_date: Option<crate::Date>,
-//     #[cfg_attr(feature = "serde-support", serde(default))]
-//     pub finished: bool,
-//     pub threshold_date: Option<crate::Date>,
-//     pub due_date: Option<crate::Date>,
-//     #[cfg_attr(feature = "serde-support", serde(default))]
-//     pub contexts: Vec<String>,
-//     #[cfg_attr(feature = "serde-support", serde(default))]
-//     pub projects: Vec<String>,
-//     #[cfg_attr(feature = "serde-support", serde(default))]
-//     pub hashtags: Vec<String>,
-//     #[cfg_attr(feature = "serde-support", serde(default))]
-//     pub tags: BTreeMap<String, String>,
-// }
-
 export default function Task(props) {
   console.log(props.index)
   const [checked, setChecked] = useState(props.details.finished);

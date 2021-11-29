@@ -64,11 +64,14 @@ class Taskview extends Component {
     // If the component mounted then we evaluate if the promise resolved
     this.state.taskList
       .then((list) => {
+        list = Object(list)
+        console.log("test")
         console.log("test", list)
-        this.setState({ taskList: genTaskListComponents(list) });
+        console.log(list.entries())
+        // this.setState({ taskList: genTaskListComponents(list) });
       })
       .finally(() => {
-        this.setState({ loading: false });
+        // this.setState({ loading: false });
       });
   }
 
