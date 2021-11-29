@@ -47,26 +47,6 @@ function genTaskListComponents(taskList) {
 
   console.log(outputArray);
   return outputArray;
-
-  // let outputArray = [];
-  // for (let [priorityOrder, subList] of groupedMap) {
-  //   let prio =
-  //     priorityOrder < 26
-  //       ? (priorityOrder + 10).toString(36).toUpperCase()
-  //       : "None";
-  //   outputArray.push(
-  //     <li className={`Priority ${prio}`} key={priorityOrder}>
-  //       <div id='title'>{prio}</div>
-  //       <ul>
-  //         {subList.map((content, index) => {
-  //           // console.log(index)
-  //           return <Task details={content} index={index}></Task>;
-  //         })}
-  //       </ul>
-  //     </li>
-  //   );
-  // }
-  // return outputArray;
 }
 
 class Taskview extends Component {
@@ -84,6 +64,7 @@ class Taskview extends Component {
     // If the component mounted then we evaluate if the promise resolved
     this.state.taskList
       .then((list) => {
+        console.log("test", list)
         this.setState({ taskList: genTaskListComponents(list) });
       })
       .finally(() => {

@@ -32,20 +32,16 @@ import { invoke } from '@tauri-apps/api/tauri'
 function App() {
   // Theme toggling
   const [theme, themeToggler, mountedComponent] = useDarkMode();
-  // const invoke =  window.__TAURI__.invoke
-  // const themeMode = theme === 'light' ? lightTheme : darkTheme;
-  // const log = 
-  const todoTabCount = invoke("todo_list_length");
-  console.log()
-  const todo_text = invoke("get_todo", { "index" : 0})
+  const loaded_todos = invoke("get_all_loaded_todo")
   if (!mountedComponent) return <div />
   
   return (
-      <div className={`App ${theme}`}>
+    <div className={`App ${theme}`}>
+      <button onClick={invoke("get_all_loaded_todo")}/>
         <div className="Row">
           <Sidebar theme={theme} toggleTheme={themeToggler} />
           <NewToDoModal />
-          <Taskview taskList={todo_text} />
+          <Taskview taskList={loaded_todos} />
         </div>
         </div>
     )

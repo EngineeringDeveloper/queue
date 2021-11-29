@@ -7,6 +7,9 @@ mod local_storage;
 // mod todo;
 mod update;
 
+#[cfg(test)]
+mod tests;
+
 // use todo::{read_todo, LoadedTodo};
 use std::collections::HashMap;
 use std::sync::Mutex;
@@ -25,9 +28,16 @@ fn main() {
     .expect("error while running tauri application");
 }
 
+#[derive(Debug)]
 struct AppState {
   // list of the todolists loaded, String key is the path to that list on disk
   loaded_todo_lists: Mutex<HashMap<String, todo_lib::TaskList>>,
+}
+
+impl PartialEq for AppState {
+    fn eq(&self, other: &Self) -> bool {
+        self.loaded_todo_lists.lock().unwrap().clone() == other.loaded_todo_lists.lock().unwrap().clone()
+    }
 }
 
 impl AppState {
@@ -55,11 +65,11 @@ impl AppState {
 
 #[tauri::command]
 fn get_all_loaded_todo(state: tauri::State<AppState>) -> HashMap<String, todo_lib::TaskList> {
-  let mut locked_loaded_todo_lists = state
+  let locked_loaded_todo_lists = state
     .loaded_todo_lists
     .lock()
     .expect("Who is the othe user?");
-
+  println!("{:?}", locked_loaded_todo_lists);
   locked_loaded_todo_lists.clone()
 }
 

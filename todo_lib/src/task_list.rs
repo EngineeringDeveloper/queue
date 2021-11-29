@@ -1,8 +1,4 @@
-use std::{
-    fs,
-    io::{self, Read},
-    str::FromStr,
-};
+use std::{fs, io::{self, Read}, path::Path, str::FromStr};
 
 use crate::Task;
 use serde::{Deserialize, Serialize};
@@ -12,14 +8,14 @@ use serde::{Deserialize, Serialize};
 ///
 ///
 
-#[derive(Clone, Serialize, Deserialize, Debug)]
+#[derive(Eq, PartialEq, Clone, Serialize, Deserialize, Debug)]
 pub struct TaskList {
     pub source: String,
     pub tasks: Vec<Task>,
 }
 
 impl TaskList {
-    pub fn from_file(path: &str) -> Result<TaskList, io::Error> {
+    pub fn from_file<P: AsRef<Path>>(path: &P) -> Result<TaskList, io::Error> {
         let mut todofile;
         match fs::File::open(path) {
             Ok(file) => todofile = file,

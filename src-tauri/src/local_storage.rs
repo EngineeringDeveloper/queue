@@ -12,7 +12,7 @@ const AUTHOR: &str = "EngineeringDeveloper";
   
 
 // 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(PartialEq, Eq, Serialize, Deserialize, Debug)]
 pub struct Config {
     pub todo_txt_vec: Vec<String>,
 }
