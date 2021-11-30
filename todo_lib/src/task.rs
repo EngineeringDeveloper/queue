@@ -4,9 +4,6 @@ use crate::Date;
 /// a task is based off the todo.txt format
 ///
 use serde::{Deserialize, Serialize};
-use std::collections::HashMap;
-// get the users username whoami::username()
-use whoami;
 
 struct Priority;
 

@@ -49,6 +49,7 @@ dependencies = [
  "tauri",
  "tauri-build",
  "todo_lib",
+ "whoami",
 ]
 
 [[package]]
@@ -3124,7 +3125,6 @@ dependencies = [
  "chrono",
  "serde",
  "serde_json",
- "whoami",
 ]
 
 [[package]]

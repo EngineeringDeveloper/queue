@@ -79,6 +79,6 @@ fn generate_task_from_str() {
 
 #[test]
 fn generate_task_list_from_path() {
-    let path = "../testFiles/todo.txt";
-    TaskList::from_file(path).unwrap();
+    let path = String::from("../testFiles/todo.txt");
+    TaskList::from_file(&path).unwrap();
 }

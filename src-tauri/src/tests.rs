@@ -14,14 +14,19 @@ fn test_AppState() {
   //   println!("{:?}", locked_loaded_todo_lists);
 
   let path = "..\\testFiles\\todo.txt";
+  let path_2 = "..\\testFiles\\otherTodo.txt";
   let correct_state = AppState {
-    loaded_todo_lists: Mutex::new(HashMap::from([(
-      path.to_owned(),
-      TaskList::from_file(&canonicalize(path).unwrap()).expect("why not"),
-    )])),
+    loaded_todo_lists: Mutex::new(HashMap::from([
+      (
+        path.to_owned(),
+        TaskList::from_file(&path.to_owned()).expect("why not"),
+      ),
+      (
+        path_2.to_owned(),
+        TaskList::from_file(&path_2.to_owned()).expect("why not"),
+      ),
+    ])),
   };
-  //   println!("{:?}", app_state);
-  //   println!("{:?}", correct_state);
   assert_eq!(app_state, correct_state);
 }
 
@@ -29,9 +34,7 @@ fn test_AppState() {
 fn test_local_storage_config() {
   // Test load local config
   let config = local_storage::Config {
-    todo_txt_vec: vec![
-      "..\\testFiles\\todo.txt".to_owned(),
-    ],
+    todo_txt_vec: vec!["..\\testFiles\\todo.txt".to_owned(), "..\\testFiles\\otherTodo.txt".to_owned()],
   };
   assert_eq!(config, local_storage::load_local_config());
 }

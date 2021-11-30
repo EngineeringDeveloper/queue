@@ -5,21 +5,51 @@
 			"type": "shell",
 			"label": "Development",
 			"command": "yarn",
-			"args": ["tauri", "dev"],
+			"args": [
+				"tauri",
+				"dev"
+			],
 			"problemMatcher": []
 		},
 		{
 			"type": "shell",
 			"label": "Production",
 			"command": "yarn",
-			"args": ["tauri", "build"],
+			"args": [
+				"tauri",
+				"build"
+			],
 			"problemMatcher": []
 		},
 		{
 			"type": "shell",
 			"label": "Re-install Tauri",
 			"command": "yarn",
-			"args": ["add", "@tauri-apps/api"],
+			"args": [
+				"add",
+				"@tauri-apps/api"
+			],
+			"problemMatcher": []
+		},
+		{
+			"type": "shell",
+			"label": "todo_lib_test",
+			"command": "cd todo_lib & cargo test & cd ..\\",
+			"problemMatcher": []
+		},
+		{
+			"type": "shell",
+			"label": "Backend Test",
+			"command": "cd src-tauri & cargo test & cd ..\\",
+			"problemMatcher": []
+		},
+		{
+			"label": "Test-All",
+			"dependsOn": [
+				"Backend Test",
+				"todo_lib_test"
+			],
+			"dependsOrder": "sequence",
 			"problemMatcher": []
 		}
 	]
