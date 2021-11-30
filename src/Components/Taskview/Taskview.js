@@ -1,52 +1,44 @@
 import React, { Component } from "react";
 import Task from "./Task.js";
+import Tabs from "../Tabs.js";
 import "./Taskview.css";
 import SearchIcon from "@mui/icons-material/Search";
 import CircularProgress from "@mui/material/CircularProgress";
 // https://mui.com/components/progress/
 import { invoke } from "@tauri-apps/api/tauri";
 
-// // js function for grouping by an internal json value
-// function groupBy(list, keyGetter) {
-//   const map = new Map();
-//   list.forEach((item) => {
-//     const key = keyGetter(item);
-//     const collection = map.get(key);
-//     if (!collection) {
-//       map.set(key, [item]);
-//     } else {
-//       collection.push(item);
-//     }
-//   });
-//   const sortedMap = new Map([...map.entries()].sort());
-//   return sortedMap;
-// }
-
-function genTaskListComponents(taskList) {
-  // Creates a Priority grouped and sorted list of the task list
-  // let groupedMap = groupBy(taskList, (obj) => obj.priority);
+function genTaskListComponents(taskList_objects) {
   let outputArray = [];
-  for (let priority in taskList) {
-    if (taskList.hasOwnProperty(priority)) {
-      const taskVec = taskList[priority];
-      priority = parseInt(priority);
-      let prioritryLetter =
-        priority < 26 ? (priority + 10).toString(36).toUpperCase() : "None";
-      outputArray.push(
-        <li className={`Priority ${prioritryLetter}`} key={priority}>
-          <div id='title'>{prioritryLetter}</div>
-          <ul>
-            {taskVec.map((content, index) => {
-              return <Task details={content} index={index}></Task>;
-            })}
-          </ul>
-        </li>
-      );
-    }
+  for (let taskList in taskList_objects) {
+    let subArray = [];
+    let source = taskList.source;
+    let taskVec = taskList_objects.tasks;
+    // for (let task in taskVec) {
+    // let priority = task.priority;
+    // const taskVec = taskList[priority];
+    subArray.push(
+      <div label={source}>
+        {taskVec.map((content, index) => {
+          let priority = parseInt(content.priority);
+          let prioritryLetter =
+            priority < 26 ? (priority + 10).toString(36).toUpperCase() : "None";
+          return (
+            <li className={`Priority ${prioritryLetter}`} key={priority}>
+              <div id='title'>{prioritryLetter}</div>
+              <ul>
+                <Task details={content} index={index}></Task>
+              </ul>
+            </li>
+          );
+        })}
+      </div>
+    );
+    outputArray.push(subArray);
+    // }
   }
 
   console.log(outputArray);
-  return outputArray;
+  return <Tabs>{outputArray}</Tabs>;
 }
 
 class Taskview extends Component {
@@ -64,14 +56,11 @@ class Taskview extends Component {
     // If the component mounted then we evaluate if the promise resolved
     this.state.taskList
       .then((list) => {
-        list = Object(list)
-        console.log("test")
-        console.log("test", list)
-        console.log(list.entries())
-        // this.setState({ taskList: genTaskListComponents(list) });
+        let task_keys = [];
+        this.setState({ taskList: genTaskListComponents(list) });
       })
       .finally(() => {
-        // this.setState({ loading: false });
+        this.setState({ loading: false });
       });
   }
 
