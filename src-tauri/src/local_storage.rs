@@ -1,54 +1,74 @@
 use directories::ProjectDirs;
-use serde::{Serialize, Deserialize};
+use serde::{Deserialize, Serialize};
 use serde_json::de;
 
-
 // import for writing files
-use std::{fs::{File, create_dir_all}, io::Write};
+use std::{
+  fs::{create_dir_all, File},
+  io::Write,
+};
 // use std::io::{Write, Read};
 
 const NAME: &str = "Queue"; // env!("CARGO_PKG_NAME"); // Hopefully no more name changes but this keeps it simple
 const AUTHOR: &str = "EngineeringDeveloper";
-  
 
-// 
+//
 #[derive(PartialEq, Eq, Serialize, Deserialize, Debug)]
 pub struct Config {
-    pub todo_txt_vec: Vec<String>,
+  pub todo_txt_vec: Vec<String>,
 }
-
 
 /// get the local config location
 fn get_local_config() -> File {
-    // TODO Error handeling
-    let project_dir = ProjectDirs::from("", AUTHOR, NAME)
-    .unwrap();
-    let path = project_dir.config_dir();
-    create_dir_all(&path).unwrap();
-    let path  = path.join("Queue.config");
+  // TODO Error handeling
+  let project_dir = ProjectDirs::from("", AUTHOR, NAME).unwrap();
+  let path = project_dir.config_dir();
+  create_dir_all(&path).unwrap();
+  let path = path.join("Queue.config");
 
-    match File::open(&path) {
-            Ok(file) => file,
-            Err(_) => {
-                // file does not exist
-                println!("{}", &path.to_str().unwrap());
-                let file = File::create(&path).unwrap();
-                // save empty config
-                save_local_config(Config{
-                    todo_txt_vec: vec!["".into()]
-                });
-                file
-            }
-        }
+  match File::open(&path) {
+    Ok(file) => file,
+    Err(_) => {
+      // file does not exist
+      println!("{}", &path.to_str().unwrap());
+      let file = File::create(&path).unwrap();
+      // save empty config
+      save_local_config(Config {
+        todo_txt_vec: vec!["".into()],
+      });
+      file
+    }
+  }
 }
 
 pub fn save_local_config(config: Config) -> Result<(), std::io::Error> {
-    // TODO Error handeling
-    let mut file = get_local_config();
-    file.write_all(serde_json::to_string(&config).unwrap().as_bytes())
+  // TODO Error handeling
+  let mut file = get_local_config();
+  file.write_all(serde_json::to_string(&config).unwrap().as_bytes())
 }
 
 pub fn load_local_config() -> Config {
-    // TODO Error handeling
-    de::from_reader(get_local_config()).unwrap()
+  // TODO Error handeling
+  de::from_reader(get_local_config()).unwrap()
+}
+
+pub fn load_config(path: &str) -> Config {
+  // TODO Error handeling
+  let mut file;
+  match File::open(&path) {
+    Ok(opened_file) => file = opened_file,
+    Err(_) => {
+      // file does not exist
+      println!("{}", path);
+      file = File::create(&path).unwrap();
+      file.write_all(
+        serde_json::to_string(&Config {
+          todo_txt_vec: vec!["".into()],
+        })
+        .unwrap()
+        .as_bytes(),
+      ).unwrap();
+    }
+  }
+  de::from_reader(file).unwrap()
 }

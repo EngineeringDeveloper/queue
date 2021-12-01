@@ -42,7 +42,12 @@ impl PartialEq for AppState {
 
 impl AppState {
   fn read_local_state() -> AppState {
-    let config = local_storage::load_local_config();
+    let config;
+    if cfg!(debug_assertions) {
+      config = local_storage::load_config("..\\testFiles\\Queue.config");
+    } else {
+      config = local_storage::load_local_config();
+    }
 
     AppState {
       loaded_todo_lists: Mutex::new(
