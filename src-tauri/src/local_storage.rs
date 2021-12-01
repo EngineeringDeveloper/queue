@@ -5,7 +5,7 @@ use serde_json::de;
 // import for writing files
 use std::{
   fs::{create_dir_all, File},
-  io::Write,
+  io::Write, path::{PathBuf}, collections::HashMap,
 };
 // use std::io::{Write, Read};
 
@@ -18,48 +18,69 @@ pub struct Config {
   pub todo_txt_vec: Vec<String>,
 }
 
-/// get the local config location
-fn get_local_config() -> File {
-  // TODO Error handeling
-  let project_dir = ProjectDirs::from("", AUTHOR, NAME).unwrap();
-  let path = project_dir.config_dir();
-  create_dir_all(&path).unwrap();
-  let path = path.join("Queue.config");
+impl Config {
+  
+  pub fn from_path(path: &str) -> Config {
+    // TODO Error handeling
+    let file = load_file(path);
+    de::from_reader(file).unwrap()
+  }
 
-  match File::open(&path) {
-    Ok(file) => file,
-    Err(_) => {
-      // file does not exist
-      println!("{}", &path.to_str().unwrap());
-      let file = File::create(&path).unwrap();
-      // save empty config
-      save_local_config(Config {
-        todo_txt_vec: vec!["".into()],
-      });
-      file
-    }
+  pub fn from_local() -> Config {
+    // TODO Error handeling
+    de::from_reader(get_local_config_file()).unwrap()
+  }
+
+  
+  pub fn save_local_config_to_path(self) -> Result<(), std::io::Error> {
+    // TODO Error handeling
+    let mut file = self::get_local_config_file();
+    file.write_all(serde_json::to_string(&self).unwrap().as_bytes())
+  }
+
+  
+
+  pub fn get_taskVec(self) -> HashMap<String, todo_lib::TaskList>{
+    self.todo_txt_vec
+          .into_iter()
+          .filter_map(|path| {
+            // todo_lib::from_file will create the file if it did not exist
+            let task_list_result = todo_lib::TaskList::from_file(&path);
+            match task_list_result {
+              Ok(task_list) => Some((path, task_list)),
+              Err(_) => None,
+            }
+          })
+          .collect::<HashMap<String, todo_lib::TaskList>>()
   }
 }
 
-pub fn save_local_config(config: Config) -> Result<(), std::io::Error> {
+fn get_local_config_file() -> File {
+  // get the local config location
   // TODO Error handeling
-  let mut file = get_local_config();
-  file.write_all(serde_json::to_string(&config).unwrap().as_bytes())
+  let path;
+  if cfg!(debug_assertions) {
+    path = PathBuf::from("..\\testFiles\\Queue.config");
+  } else {
+    let project_dir = ProjectDirs::from("", AUTHOR, NAME).unwrap();
+    let dir_path = project_dir.config_dir();
+    create_dir_all(&dir_path).unwrap();
+    path = dir_path.join("Queue.config");
+  }
+  load_file(&path.to_str().expect("Path should always be convertable to str"))
 }
 
-pub fn load_local_config() -> Config {
+fn load_file(path: &str) -> File {
   // TODO Error handeling
-  de::from_reader(get_local_config()).unwrap()
-}
-
-pub fn load_config(path: &str) -> Config {
-  // TODO Error handeling
+  // Creates file if not existing
+  // but does not create the subfolders
+  // let mut file;
+  // File::open(&path)
   let mut file;
   match File::open(&path) {
     Ok(opened_file) => file = opened_file,
     Err(_) => {
       // file does not exist
-      println!("{}", path);
       file = File::create(&path).unwrap();
       file.write_all(
         serde_json::to_string(&Config {
@@ -70,5 +91,5 @@ pub fn load_config(path: &str) -> Config {
       ).unwrap();
     }
   }
-  de::from_reader(file).unwrap()
+  file
 }

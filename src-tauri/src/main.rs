@@ -13,6 +13,7 @@ mod tests;
 // use todo::{read_todo, LoadedTodo};
 use std::collections::HashMap;
 use std::sync::Mutex;
+use local_storage::Config;
 
 
 fn main() {
@@ -42,27 +43,11 @@ impl PartialEq for AppState {
 
 impl AppState {
   fn read_local_state() -> AppState {
-    let config;
-    if cfg!(debug_assertions) {
-      config = local_storage::load_config("..\\testFiles\\Queue.config");
-    } else {
-      config = local_storage::load_local_config();
-    }
+    let config = Config::from_local();
 
     AppState {
       loaded_todo_lists: Mutex::new(
-        config
-          .todo_txt_vec
-          .into_iter()
-          .filter_map(|path| {
-            // todo_lib::from_file will create the file if it did not exist
-            let task_list_result = todo_lib::TaskList::from_file(&path);
-            match task_list_result {
-              Ok(task_list) => Some((path, task_list)),
-              Err(_) => None,
-            }
-          })
-          .collect::<HashMap<String, todo_lib::TaskList>>(),
+        config.get_taskVec()
       ),
     }
   }

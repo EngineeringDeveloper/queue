@@ -36,7 +36,7 @@ fn test_local_storage_config() {
   let config = local_storage::Config {
     todo_txt_vec: vec!["..\\testFiles\\todo.txt".to_owned(), "..\\testFiles\\otherTodo.txt".to_owned()],
   };
-  assert_eq!(config, local_storage::load_local_config());
+  assert_eq!(config, local_storage::Config::from_local());
 }
 
 #[test]
