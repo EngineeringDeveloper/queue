@@ -83,3 +83,24 @@ input {
   border-bottom-right-radius: 25px;
   background-color: var(--prio-border);
 }
+
+
+.tab-list {  
+  border-bottom: 1px solid var(--theme-foreground);
+  padding-left: 0;
+}
+
+.tab-list-item {
+  display: inline-block;
+  list-style: none;
+  margin-bottom: -1px;
+  padding: 0.5rem 0.75rem;
+}
+
+.tab-list-active {
+  /* background-color: var(); */
+  border: solid var(--theme-foreground);
+  border-width: 1px 1px 0 1px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}

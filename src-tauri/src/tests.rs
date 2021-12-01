@@ -39,5 +39,3 @@ fn test_local_storage_config() {
   assert_eq!(config, local_storage::Config::from_local());
 }
 
-#[test]
-fn test_() {}
