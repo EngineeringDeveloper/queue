@@ -98,7 +98,7 @@ input {
 }
 
 .tab-list-active {
-  /* background-color: var(); */
+  background-color: var(--theme-foreground);
   border: solid var(--theme-foreground);
   border-width: 1px 1px 0 1px;
   border-top-left-radius: 10px;

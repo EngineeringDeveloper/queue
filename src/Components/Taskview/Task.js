@@ -6,7 +6,7 @@ import { invoke } from '@tauri-apps/api/tauri'
 
 
 export default function Task(props) {
-  console.log(props.index)
+  console.log(props)
   const [checked, setChecked] = useState(props.details.finished);
   const handleChange = () => {
     props.details.finished = !checked
@@ -14,7 +14,7 @@ export default function Task(props) {
     setChecked(!checked)
   }
   return (
-    <li key={props.index} className={'Task ' + checked}>
+    <div  className={'Task ' + checked}>
       <Checkbox checked={checked} onChange={handleChange}></Checkbox>
       <div style={{ padding: 0, display: "flex", flexFlow: "column" }}>
         <Subject subject={props.details.subject} />
@@ -22,7 +22,7 @@ export default function Task(props) {
           <Boxed array={props.details.projects} cssClass='Project' />
           <Boxed array={props.details.contexts} cssClass='Context' />
           <Boxed array = {props.details.hashtags} cssClass="Hashtag"/>
-          <Boxed array = {props.details.tags} cssClass="Tag"/>
+          {/* <Boxed array = {props.details.tags} cssClass="Tag"/> */}
         </div>
         <div className='Dates'>
           <div>{"date :" + props.details.create_date}</div>
@@ -31,7 +31,7 @@ export default function Task(props) {
           <div>{"due :" + props.details.due_date}</div>
         </div>
       </div>
-    </li>
+    </div>
   );
 }
 
@@ -40,6 +40,7 @@ const Subject = ({ subject }) => {
 };
 
 const Boxed = ({ array, cssClass }) => {
+  console.log(cssClass, array)
   if (array.length > 0) {
     let list = array.map((value, key) => {
       return (

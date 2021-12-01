@@ -9,29 +9,28 @@ import { invoke } from "@tauri-apps/api/tauri";
 
 function genTaskListComponents(taskList_objects) {
   let outputArray = [];
-  console.log(taskList_objects)
   for (let taskList in taskList_objects) {
     taskList = taskList_objects[taskList];
     // console.log(taskList);
     // let subArray = [];
     let source = taskList.source;
     let taskVec = taskList.tasks;
-    console.log(source, taskVec)
     // for (let task in taskVec) {
     // let priority = task.priority;
     // const taskVec = taskList[priority];
+    // console.log(taskVec);
     let setup;
-    if (typeof variable !== 'undefined') {
+    if (typeof taskVec !== 'undefined') {
       setup = (taskVec.map((content, index) => {
         let priority = parseInt(content.priority);
         let prioritryLetter =
           priority < 26 ? (priority + 10).toString(36).toUpperCase() : "None";
         return (
-          <li className={`Priority ${prioritryLetter}`} key={priority}>
+          <li className={`Priority ${prioritryLetter}`} key={index}>
             <div id='title'>{prioritryLetter}</div>
-            <ul>
+            {/* <ul> */}
               <Task details={content} index={index}></Task>
-            </ul>
+            {/* </ul> */}
           </li>
         );
       })
@@ -41,7 +40,9 @@ function genTaskListComponents(taskList_objects) {
     }
     outputArray.push(
       <div label={source}>
+        <ul>
         {setup}
+        </ul>
       </div>
     );
     // outputArray.push(subArray);
