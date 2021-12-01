@@ -82,6 +82,7 @@ fn get_todo(state: tauri::State<AppState>, source: String) -> todo_lib::TaskList
     let new_tasklist = todo_lib::TaskList {
       source: source.clone(),
       tasks: vec![],
+      prioritised_tasks: HashMap::new()
     };
     // insert this loaded todo to this hashmap
     locked_loaded_todo_lists.insert(new_tasklist.source.clone(), new_tasklist);

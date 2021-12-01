@@ -11,37 +11,45 @@ function genTaskListComponents(taskList_objects) {
   let outputArray = [];
   for (let taskList in taskList_objects) {
     taskList = taskList_objects[taskList];
-    // console.log(taskList);
-    // let subArray = [];
-    let source = taskList.source;
+    
     let taskVec = taskList.tasks;
-    // for (let task in taskVec) {
-    // let priority = task.priority;
-    // const taskVec = taskList[priority];
-    // console.log(taskVec);
-    let setup;
-    if (typeof taskVec !== 'undefined') {
-      setup = (taskVec.map((content, index) => {
-        let priority = parseInt(content.priority);
-        let prioritryLetter =
+    let source = taskList.source;
+    let priority_sort = taskList.prioritised_tasks;
+
+    let todo_list = [];
+    if (typeof taskVec !== 'undefined' | taskVec.length !== 0) {
+      
+      for (let priority in priority_sort) {
+        let taskList_slice = priority_sort[priority]
+        console.log(priority)
+        priority = parseInt(priority);
+        console.log(priority)
+        let priorityLetter =
           priority < 26 ? (priority + 10).toString(36).toUpperCase() : "None";
-        return (
-          <li className={`Priority ${prioritryLetter}`} key={index}>
-            <div id='title'>{prioritryLetter}</div>
-            {/* <ul> */}
-              <Task details={content} index={index}></Task>
-            {/* </ul> */}
+        
+        let tasks = taskList_slice.map((content, index) => {
+          return (
+            <Task details={content} index={index}></Task>
+            )
+        })
+        todo_list.push(
+          <li className={`Priority ${priorityLetter}`} key={priority}>
+            <div id='title'>{priorityLetter}</div>
+              <ul>
+                {tasks}
+              </ul>
           </li>
         );
-      })
-      )
+      }
     } else {
-      setup = (<div/>)
+      console.log(typeof taskVec, taskVec.length)
+      todo_list = (<div/>)
     }
+
     outputArray.push(
       <div label={source}>
         <ul>
-        {setup}
+        {todo_list}
         </ul>
       </div>
     );

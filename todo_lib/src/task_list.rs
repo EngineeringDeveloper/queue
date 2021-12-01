@@ -18,13 +18,23 @@ use serde::{Deserialize, Serialize};
 pub struct TaskList {
     pub source: String,
     pub tasks: Vec<Task>,
-    pub Prioritised_tasks: HashMap<u8, Vec<Task>>,
+    pub prioritised_tasks: HashMap<u8, Vec<Task>>,
 }
 
 impl TaskList {
+    pub fn new(source: String, tasks: Vec<Task>, prioritised_tasks: HashMap<u8, Vec<Task>>) -> Self { Self { source, tasks, prioritised_tasks } }
+
+    pub fn default() -> Self {
+        Self {
+            source: "".into(),
+            tasks: vec![],
+            prioritised_tasks: HashMap::new(),
+        }
+    }
+
     pub fn from_file<'a, P: AsRef<Path> + std::fmt::Debug>(
         path: &'a P,
-    ) -> Result<TaskList, io::Error>
+    ) -> Result<Self, io::Error>
     where
         std::string::String: From<&'a P>,
     {
@@ -44,12 +54,12 @@ impl TaskList {
         let mut contents = String::new();
         todofile.read_to_string(&mut contents)?;
         let tasks = vec_tasks_from_str(&contents);
-        let Prioritised_tasks = prioritised_tasks_from_vec_tasks(&tasks);
+        let prioritised_tasks = prioritised_tasks_from_vec_tasks(&tasks);
 
         Ok(TaskList {
             source: String::from(path),
             tasks,
-            Prioritised_tasks,
+            prioritised_tasks,
         })
         // Ok(TaskList::from_str(&contents).expect("from Str should always return Ok"))
     }
@@ -77,11 +87,11 @@ impl TaskList {
 impl std::str::FromStr for TaskList {
     type Err = ();
 
-    fn from_str(s: &str) -> Result<TaskList, ()> {
+    fn from_str(s: &str) -> Result<Self, ()> {
         let tasks = vec_tasks_from_str(s);
         Ok(TaskList {
             source: "".into(),
-            Prioritised_tasks: prioritised_tasks_from_vec_tasks(&tasks),
+            prioritised_tasks: prioritised_tasks_from_vec_tasks(&tasks),
             tasks,
         })
     }
@@ -93,12 +103,12 @@ fn vec_tasks_from_str(s: &str) -> Vec<Task> {
         .collect()
 }
 
-fn prioritised_tasks_from_vec_tasks(vt: &Vec<Task>) -> HashMap<u8, Vec<Task>> {
+fn prioritised_tasks_from_vec_tasks(vt: &[Task]) -> HashMap<u8, Vec<Task>> {
     let mut hashmap = HashMap::new();
     for task in vt {
         hashmap
                 .entry(task.priority)
-                .or_insert(Vec::new())
+                .or_insert_with(Vec::new)
                 .push(task.clone());
     }
     hashmap
