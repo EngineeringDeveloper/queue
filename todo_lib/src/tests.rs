@@ -120,3 +120,10 @@ fn test_modify_task() {
     
     assert!(task_list.tasks.iter().find(|task| {task.subject == *"New_task"}) != None);
 }
+
+#[test]
+fn test_save_task_list() {
+    let task_list = TaskList::from_file(&"../testFiles/todo.txt".to_owned()).unwrap();
+    println!("{}", task_list);
+    task_list.save().unwrap();
+}

@@ -1,7 +1,7 @@
 2021-10-06 This +HasProject
 2021-11-08 is @context
 2021-11-08 my
-2021-11-08 test +Project @mycontext
+2021-11-08 test @mycontext +Project
 2021-11-08 list
 2021-11-08 it
 2021-11-08 is
@@ -9,7 +9,7 @@
 2021-11-08 enough due:2022-07-20
 2021-11-08 to
 2021-11-08 scroll
-2021-11-08 vertically due:2021-11-26 rec:w +vertical @notHorizontal
+2021-11-08 vertically due:2021-11-26 @notHorizontal +vertical
 2021-11-08 And also some of the tasks could be scrolled horizontally if they are too long, to be honest i think this length of task description is far too long to be productive but needs to be tested
 2021-11-08 Progress
 2021-11-08 is
@@ -29,7 +29,7 @@
 2021-11-08 readable
 2021-11-08 language
 x 2021-11-23 2021-11-23 Some
-x 2021-11-23 2021-11-23 are Completed with +Project @context
-(A) 2021-11-23 Priority #hashtag +priority +multiplePriortiy @context @othercont
+x 2021-11-23 2021-11-23 are Completed with @context +Project
+(A) 2021-11-23 Priority @context @othercont +multiplePriortiy +priority #hashtag
 (B) 2021-11-23 next priority
-(C) 2021-11-23 other priorty with +Project @context
+(C) 2021-11-23 other priorty with @context +Project

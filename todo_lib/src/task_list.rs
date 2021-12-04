@@ -9,6 +9,7 @@ use std::{
 
 use crate::Task;
 use serde::{Deserialize, Serialize};
+use serde_json::error;
 
 /// Task list struct is a container for a vec of tasks
 /// It also does operations to keep track of changes sort and filter
@@ -85,19 +86,10 @@ impl TaskList {
         self.prioritised_tasks = prioritised_tasks_from_vec_tasks(&self.tasks)
     }
 
-    pub fn save(self, path: &str) -> Result<(), io::Error> {
-        let mut todo_file;
-        match fs::File::open(path) {
-            Ok(file) => todo_file = file,
-            Err(error) => {
-                // dealing with this error if we can create the file path we will
-                // and continue
-                match error.kind() {
-                    io::ErrorKind::NotFound => todo_file = fs::File::create(path)?,
-                    _ => return Err(error),
-                }
-            }
-        }
+    pub fn save(&self) -> Result<(), io::Error> {
+        // saves to the contained self.source
+        let path = self.source.clone();
+        let mut todo_file = fs::File::create(&path)?;
         todo_file.write_all(format!("{}", self).as_bytes())
     }
 }
@@ -119,7 +111,7 @@ impl std::fmt::Display for TaskList {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         
         for task in &self.tasks {
-            f.write_str(format!("{}/n", task).as_str())?
+            f.write_str(format!("{}\n", task).as_str())?
         }
         Ok(())
     }

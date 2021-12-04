@@ -91,10 +91,12 @@ fn recieve_task(state: tauri::State<AppState>, new_task: todo_lib::Task, source:
   // let mut identified_taskList = locked_loaded_todo_lists[&source];
   if let Some(identified_task_list) = locked_loaded_todo_lists.get_mut(&source) {
     identified_task_list.change_task(new_task);
+    identified_task_list.save().unwrap();
   } else {
     // TODO: What should happen here?
     println!("could not get mutable version of the TaskList Prio hash")
   }
+  
 }
 
 // #[tauri::command]
