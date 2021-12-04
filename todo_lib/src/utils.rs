@@ -1,6 +1,6 @@
 use crate::Date;
 use serde::{Deserialize, Serialize};
-
+use std::hash::{Hash};
 
 pub const PROJECT_TAG: &str = "+"; // project marker
 pub const CONTEXT_TAG: &str = "@"; // context marker
@@ -16,7 +16,7 @@ pub const CREATOR_TAG_FULL: &str = "cre:"; // task created by
 pub const ASSIGNED_TAG_FULL: &str = "resp:"; // task reponsible
 
 
-#[derive(PartialEq, Debug, Copy, Clone, Serialize, Deserialize, Eq, Ord, PartialOrd)]
+#[derive(PartialEq, Debug, Copy, Clone, Serialize, Deserialize, Eq, Ord, PartialOrd, Hash)]
 pub enum Period {
     Day,
     Week,
@@ -24,7 +24,7 @@ pub enum Period {
     Year,
 }
 
-#[derive(PartialEq, Debug, Copy, Clone, Serialize, Deserialize, Eq, Ord, PartialOrd)]
+#[derive(PartialEq, Debug, Copy, Clone, Serialize, Deserialize, Eq, Ord, PartialOrd, Hash)]
 pub struct Recurrence {
     pub period: Period,
     pub count: u8,

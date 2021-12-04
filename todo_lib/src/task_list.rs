@@ -38,7 +38,6 @@ impl TaskList {
     where
         std::string::String: From<&'a P>,
     {
-        println!("{:?}", path);
         let mut todofile;
         match fs::File::open(path) {
             Ok(file) => todofile = file,

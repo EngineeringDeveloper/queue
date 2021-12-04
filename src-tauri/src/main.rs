@@ -59,18 +59,9 @@ fn get_all_loaded_todo(state: tauri::State<AppState>) -> HashMap<String, todo_li
     .loaded_todo_lists
     .lock()
     .expect("Who is the othe user?");
-  // println!("{:?}", locked_loaded_todo_lists.keys());
   locked_loaded_todo_lists.clone()
 }
 
-// #[tauri::command]
-// fn todo_list_length(state: tauri::State<AppState>) -> usize {
-//   let locked_loaded_todo_lists = state
-//     .loaded_todo_lists
-//     .lock()
-//     .expect("Who is the othe user?");
-//     locked_loaded_todo_lists.len()
-// }
 
 #[tauri::command]
 fn get_todo(state: tauri::State<AppState>, source: String) -> todo_lib::TaskList {
@@ -91,8 +82,8 @@ fn get_todo(state: tauri::State<AppState>, source: String) -> todo_lib::TaskList
 }
 
 #[tauri::command]
-fn recieve_task(state: tauri::State<AppState>, task: todo_lib::Task, source: String, identifier: String) {
-  println!("{}/n{}/n{}", task, source, identifier);
+fn recieve_task(state: tauri::State<AppState>, task: todo_lib::Task, source: String) {
+  println!("L86{}/n{}/n{:?}", task, source, task.input_hash);
   // let mut todo = &state.loaded_todo_lists[0];
   // let ident_task = &todo.todo_hash[&task.priority][index];
 

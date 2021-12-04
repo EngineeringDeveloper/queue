@@ -4,7 +4,8 @@ use crate::Date;
 /// a task is based off the todo.txt format
 ///
 use serde::{Deserialize, Serialize};
-
+use std::hash::{Hash, Hasher};
+use std::collections::hash_map::DefaultHasher;
 struct Priority;
 
 impl Priority {
@@ -17,7 +18,7 @@ impl Priority {
     }
 }
 
-#[derive(Clone, Serialize, Deserialize, Debug, Eq, PartialEq, Ord, PartialOrd)]
+#[derive(Clone, Serialize, Deserialize, Debug, Eq, PartialEq, Ord, PartialOrd, Hash)]
 pub struct Task {
     pub priority: u8,
     pub finish_date: Option<Date>,
@@ -32,6 +33,7 @@ pub struct Task {
     pub contexts: Vec<String>,
     pub projects: Vec<String>,
     pub hashtags: Vec<String>,
+    pub input_hash: Option<u64>,
     // pub tags: HashMap<String, String>,
 }
 
@@ -51,6 +53,7 @@ impl Task {
             contexts: Vec::new(),
             projects: Vec::new(),
             hashtags: Vec::new(),
+            input_hash: None
             // tags: HashMap::new(),
         }
     }
@@ -59,6 +62,11 @@ impl Task {
     pub fn parse(input_string: &str) -> Self {
         // initialise a default state
         let mut task = Task::default();
+        // Create the hash of the input
+        let mut def_hasher = DefaultHasher::new();
+        input_string.hash(&mut def_hasher);
+        task.input_hash = Some(def_hasher.finish());
+
         let mut working_string = input_string.to_owned();
 
         // Sort out the ordered sections

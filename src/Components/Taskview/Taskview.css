@@ -66,6 +66,7 @@ input {
   border-style: solid;
   margin-bottom: 10px;
   margin-right: 20px;
+  list-style: none;
 }
 
 .Priority #title {

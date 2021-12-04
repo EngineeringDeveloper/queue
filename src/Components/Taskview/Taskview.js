@@ -21,15 +21,13 @@ function genTaskListComponents(taskList_objects) {
       
       for (let priority in priority_sort) {
         let taskList_slice = priority_sort[priority]
-        console.log(priority)
         priority = parseInt(priority);
-        console.log(priority)
         let priorityLetter =
           priority < 26 ? (priority + 10).toString(36).toUpperCase() : "None";
         
         let tasks = taskList_slice.map((content, index) => {
           return (
-            <Task details={content} index={index}></Task>
+            <Task task={content} source={source}></Task>
             )
         })
         todo_list.push(
@@ -76,7 +74,6 @@ class Taskview extends Component {
     // If the component mounted then we evaluate if the promise resolved
     this.state.taskList
       .then((list) => {
-        let task_keys = [];
         this.setState({ taskList: genTaskListComponents(list) });
       })
       .finally(() => {
