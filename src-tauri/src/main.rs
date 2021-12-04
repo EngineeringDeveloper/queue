@@ -47,7 +47,7 @@ impl AppState {
 
     AppState {
       loaded_todo_lists: Mutex::new(
-        config.get_taskVec()
+        config.get_task_vec()
       ),
     }
   }
@@ -82,23 +82,19 @@ fn get_todo(state: tauri::State<AppState>, source: String) -> todo_lib::TaskList
 }
 
 #[tauri::command]
-fn recieve_task(state: tauri::State<AppState>, task: todo_lib::Task, source: String) {
-  println!("L86{}/n{}/n{:?}", task, source, task.input_hash);
-
+fn recieve_task(state: tauri::State<AppState>, new_task: todo_lib::Task, source: String) {
   let mut locked_loaded_todo_lists = state
   .loaded_todo_lists
   .lock()
   .expect("Who is the othe user?");
 
-  let identified_taskList = locked_loaded_todo_lists[&source];
-  
-  // let mut todo = &state.loaded_todo_lists[0];
-  // let ident_task = &todo.todo_hash[&task.priority][index];
-
-  // // change the task to the returned task
-  // todo.todo_hash[&task.priority][index] = task;
-  // // Write the changed to the file
-  // todo.clone().write();
+  // let mut identified_taskList = locked_loaded_todo_lists[&source];
+  if let Some(identified_task_list) = locked_loaded_todo_lists.get_mut(&source) {
+    identified_task_list.change_task(new_task);
+  } else {
+    // TODO: What should happen here?
+    println!("could not get mutable version of the TaskList Prio hash")
+  }
 }
 
 // #[tauri::command]

@@ -40,7 +40,7 @@ impl Config {
 
   
 
-  pub fn get_taskVec(self) -> HashMap<String, todo_lib::TaskList>{
+  pub fn get_task_vec(self) -> HashMap<String, todo_lib::TaskList>{
     self.todo_txt_vec
           .into_iter()
           .filter_map(|path| {
@@ -67,7 +67,7 @@ fn get_local_config_file() -> File {
     create_dir_all(&dir_path).unwrap();
     path = dir_path.join("Queue.config");
   }
-  load_file(&path.to_str().expect("Path should always be convertable to str"))
+  load_file(path.to_str().expect("Path should always be convertable to str"))
 }
 
 fn load_file(path: &str) -> File {

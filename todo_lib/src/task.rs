@@ -13,9 +13,9 @@ impl Priority {
         26
     }
 
-    fn highest() -> u8 {
-        1
-    }
+    // fn highest() -> u8 {
+    //     1
+    // }
 }
 
 #[derive(Clone, Serialize, Deserialize, Debug, Eq, PartialEq, Ord, PartialOrd, Hash)]

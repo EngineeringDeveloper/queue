@@ -4,7 +4,7 @@ use std::{
     fs,
     io::{self, Read},
     path::Path,
-    str::FromStr, panic,
+    str::FromStr
 };
 
 use crate::Task;
