@@ -59,6 +59,7 @@ fn get_all_loaded_todo(state: tauri::State<AppState>) -> HashMap<String, todo_li
     .loaded_todo_lists
     .lock()
     .expect("Who is the othe user?");
+  println!("{:?}", locked_loaded_todo_lists);
   locked_loaded_todo_lists.clone()
 }
 

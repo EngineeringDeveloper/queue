@@ -67,10 +67,15 @@ impl TaskList {
     pub fn change_task(&mut self, new_task: Task) {
         // takes in the new task and uses its identifier to change the stored value
         // change the task in the taskvec and hash
+        // TODO: The hash is not being identified correctly
+        println!("{:?}", new_task.input_hash);
+        println!("{:?}", self.tasks.iter().map(|x| x.input_hash));
         if let Some(task_index) = self.tasks.iter().position(|val| {val.input_hash == new_task.input_hash}) {
+            println!("found");
             self.tasks.remove(task_index);
             self.tasks.push(new_task);
         } else {
+            println!("not found");
             self.add_task(new_task);
             // not sure this is the desired behavior
             // when the task is not already in the list it is added

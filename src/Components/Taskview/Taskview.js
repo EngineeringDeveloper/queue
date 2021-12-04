@@ -8,6 +8,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import { invoke } from "@tauri-apps/api/tauri";
 
 function genTaskListComponents(taskList_objects) {
+  console.log(taskList_objects)
   let outputArray = [];
   for (let taskList in taskList_objects) {
     taskList = taskList_objects[taskList];
