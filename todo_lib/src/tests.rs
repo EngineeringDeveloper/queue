@@ -1,13 +1,15 @@
 #[cfg(test)]
 use pretty_assertions::{assert_eq, assert_ne};
 
-use std::{ str::FromStr, collections::hash_map::DefaultHasher};
 use crate::{utils::Recurrence, Date, Task, TaskList};
 use std::hash::{Hash, Hasher};
-
+use std::{
+    collections::{hash_map::DefaultHasher, HashMap},
+    str::FromStr,
+};
 
 #[test]
-fn generate_task_from_str() {
+fn test_generate_task_from_str() {
     // assert that a full string parses correctly
     let input = "x (A) 2021-11-25 2021-11-23 rec:0d Task Subject #hashtag +priority +multiplePriority @context @othercont cre:ME resp:YOU due:2021-11-27";
     let mut def_hasher = DefaultHasher::new();
@@ -33,7 +35,7 @@ fn generate_task_from_str() {
     expected.contexts.sort();
     expected.hashtags.sort();
     assert_eq!(expected, Task::from_str(input).unwrap());
-    
+
     // assert assert edge case:
     // missing most attributes
     let input = "Task with no extra description";
@@ -86,9 +88,35 @@ fn generate_task_from_str() {
     assert_eq!(expected, Task::from_str(input).unwrap());
 }
 
-
 #[test]
-fn generate_task_list_from_path() {
+fn test_generate_task_list_from_path() {
     let path = String::from("../testFiles/todo.txt");
     TaskList::from_file(&path).unwrap();
+}
+
+#[test]
+fn test_add_task() {
+    let mut task_list = TaskList::default();
+    task_list.add_task(Task::default());
+    
+    let mut hash = HashMap::new();
+    hash.insert(26, vec![Task::default()]);
+    let expected_task_list =
+        TaskList::new("".into(),
+         vec![Task::default()],
+          hash);
+    
+    assert_eq!(task_list, expected_task_list);
+}
+
+#[test]
+fn test_modify_task() {
+
+    let mut task_list = TaskList::from_str("Test Task\nOtherTask").unwrap();
+    
+    let mut new_task = Task::from_str("Test Task").unwrap(); // to have the same index_hash
+    new_task.subject = "New_task".into();
+    task_list.change_task(new_task);
+    
+    assert!(task_list.tasks.iter().find(|task| {task.subject == *"New_task"}) != None);
 }

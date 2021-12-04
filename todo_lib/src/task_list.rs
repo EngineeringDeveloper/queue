@@ -4,7 +4,7 @@ use std::{
     fs,
     io::{self, Read},
     path::Path,
-    str::FromStr,
+    str::FromStr, panic,
 };
 
 use crate::Task;
@@ -63,8 +63,26 @@ impl TaskList {
         // Ok(TaskList::from_str(&contents).expect("from Str should always return Ok"))
     }
 
-    pub fn change_owned_task(new_task: Task) {
+    pub fn change_task(&mut self, new_task: Task) {
         // takes in the new task and uses its identifier to change the stored value
+        // change the task in the taskvec and hash
+        if let Some(task_index) = self.tasks.iter().position(|val| {val.input_hash == new_task.input_hash}) {
+            self.tasks.remove(task_index);
+            self.tasks.push(new_task);
+        } else {
+            self.add_task(new_task);
+            // not sure this is the desired behavior
+            // when the task is not already in the list it is added
+        }
+        // is this the best way to correct the hashmap, 
+        // this creates from new over -- find, remove + move
+        self.prioritised_tasks = prioritised_tasks_from_vec_tasks(&self.tasks)
+
+    }
+
+    pub fn add_task(&mut self, new_task: Task) {
+        self.tasks.push(new_task);
+        self.prioritised_tasks = prioritised_tasks_from_vec_tasks(&self.tasks)
     }
 
     // pub fn to_file(self, path: &str) -> Result<(), io::Error> {

@@ -84,6 +84,14 @@ fn get_todo(state: tauri::State<AppState>, source: String) -> todo_lib::TaskList
 #[tauri::command]
 fn recieve_task(state: tauri::State<AppState>, task: todo_lib::Task, source: String) {
   println!("L86{}/n{}/n{:?}", task, source, task.input_hash);
+
+  let mut locked_loaded_todo_lists = state
+  .loaded_todo_lists
+  .lock()
+  .expect("Who is the othe user?");
+
+  let identified_taskList = locked_loaded_todo_lists[&source];
+  
   // let mut todo = &state.loaded_todo_lists[0];
   // let ident_task = &todo.todo_hash[&task.priority][index];
 

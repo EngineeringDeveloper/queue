@@ -117,10 +117,11 @@ pub fn days_in_month(y: u32, m: u32) -> u32 {
 
 pub fn try_read_date(input: &str) -> Option<Date> {
     // if there are 2 dashes in the 10 char length then we espect a date
+    if input.len() < 10 {return None}
     let target = String::from_utf8_lossy(&input.as_bytes()[..10]);
-    if target.matches("-").count() == 2 {
+    if target.matches('-').count() == 2 {
         let mut values = vec![];
-        for section in target.split("-") {
+        for section in target.split('-') {
             match section.parse::<u32>() {
                 Err(_) => return None,
                 Ok(value) => values.push(value),
@@ -169,12 +170,12 @@ pub fn parse_priority(s: &str) -> Result<u8, String> {
     Ok((priority - b'A') as u8)
 }
 
-pub fn next_word(s: &str) -> &str {
-    if s.is_empty() {
-        return s;
-    }
-    match s.find(' ') {
-        None => s,
-        Some(p) => &s[..p],
-    }
-}
+// pub fn next_word(s: &str) -> &str {
+//     if s.is_empty() {
+//         return s;
+//     }
+//     match s.find(' ') {
+//         None => s,
+//         Some(p) => &s[..p],
+//     }
+// }
