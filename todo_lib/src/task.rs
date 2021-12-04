@@ -210,11 +210,11 @@ impl std::fmt::Display for Task {
 
         f.write_str(self.subject.as_str())?;
         
-        if let Some(created_by) = self.created_by {
+        if let Some(created_by) = &self.created_by {
             f.write_str(format!(" {}{}",CREATOR_TAG_FULL , created_by).as_str())?;
         }
         
-        if let Some(assigned_to) = self.assigned_to {
+        if let Some(assigned_to) = &self.assigned_to {
             f.write_str(format!(" {}{}",ASSIGNED_TAG_FULL , assigned_to).as_str())?;
         }
 
@@ -226,17 +226,19 @@ impl std::fmt::Display for Task {
             f.write_str(format!(" {}{}",REC_TAG_FULL , recurrence).as_str())?;
         }
 
-        for context in self.contexts {
+        for context in &self.contexts {
             f.write_str(format!(" {}{}",CONTEXT_TAG , context).as_str())?;
         }
         
-        for projects in self.projects {
+        for projects in &self.projects {
             f.write_str(format!(" {}{}",PROJECT_TAG , projects).as_str())?;
         }
         
-        for hashtags in self.hashtags {
+        for hashtags in &self.hashtags {
             f.write_str(format!(" {}{}",HASH_TAG , hashtags).as_str())?;
         }
+
+        // The hash is not written it is a prop of the input
 
         Ok(())
     }

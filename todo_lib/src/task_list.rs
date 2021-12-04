@@ -2,7 +2,7 @@ use std::{
     collections::HashMap,
     convert::From,
     fs,
-    io::{self, Read},
+    io::{self, Read, Write},
     path::Path,
     str::FromStr
 };
@@ -86,18 +86,19 @@ impl TaskList {
     }
 
     pub fn save(self, path: &str) -> Result<(), io::Error> {
-        let mut todofile;
+        let mut todo_file;
         match fs::File::open(path) {
-            Ok(file) => {todofile = file;},
+            Ok(file) => todo_file = file,
             Err(error) => {
                 // dealing with this error if we can create the file path we will
                 // and continue
                 match error.kind() {
-                    io::ErrorKind::NotFound => {todofile = fs::File::create(path)?;},
-                    _ => {return Err(error);},
+                    io::ErrorKind::NotFound => todo_file = fs::File::create(path)?,
+                    _ => return Err(error),
                 }
             }
         }
+        todo_file.write_all(format!("{}", self).as_bytes())
     }
 }
 
@@ -111,6 +112,16 @@ impl std::str::FromStr for TaskList {
             prioritised_tasks: prioritised_tasks_from_vec_tasks(&tasks),
             tasks,
         })
+    }
+}
+
+impl std::fmt::Display for TaskList {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        
+        for task in &self.tasks {
+            f.write_str(format!("{}/n", task).as_str())?
+        }
+        Ok(())
     }
 }
 
