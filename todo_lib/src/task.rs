@@ -20,13 +20,13 @@ impl Priority {
 
 #[derive(Clone, Serialize, Deserialize, Debug, Eq, PartialEq, Ord, PartialOrd, Hash)]
 pub struct Task {
+    pub finished: bool,
     pub priority: u8,
     pub finish_date: Option<Date>,
     pub create_date: Option<Date>,
     pub subject: String,
     pub created_by: Option<String>,
     pub assigned_to: Option<String>,
-    pub finished: bool,
     // pub threshold_date: Option<Date>,
     pub due_date: Option<Date>,
     pub recurrence: Option<Recurrence>,
@@ -209,18 +209,34 @@ impl std::fmt::Display for Task {
         }
 
         f.write_str(self.subject.as_str())?;
-
-        if let Some(due_date) = self.due_date {
-            f.write_str(format!(" due:{}", due_date.format("%Y-%m-%d")).as_str())?;
+        
+        if let Some(created_by) = self.created_by {
+            f.write_str(format!(" {}{}",CREATOR_TAG_FULL , created_by).as_str())?;
+        }
+        
+        if let Some(assigned_to) = self.assigned_to {
+            f.write_str(format!(" {}{}",ASSIGNED_TAG_FULL , assigned_to).as_str())?;
         }
 
-        // if let Some(threshold_date) = self.threshold_date {
-        //     f.write_str(format!(" t:{}", threshold_date.format("%Y-%m-%d")).as_str())?;
-        // }
+        if let Some(due_date) = self.due_date {
+            f.write_str(format!(" {}{}",DUE_TAG_FULL , due_date.format("%Y-%m-%d")).as_str())?;
+        }
 
-        // for (key, value) in &self.tags {
-        //     f.write_str(format!(" {}:{}", key, value).as_str())?;
-        // }
+        if let Some(recurrence) = self.recurrence {
+            f.write_str(format!(" {}{}",REC_TAG_FULL , recurrence).as_str())?;
+        }
+
+        for context in self.contexts {
+            f.write_str(format!(" {}{}",CONTEXT_TAG , context).as_str())?;
+        }
+        
+        for projects in self.projects {
+            f.write_str(format!(" {}{}",PROJECT_TAG , projects).as_str())?;
+        }
+        
+        for hashtags in self.hashtags {
+            f.write_str(format!(" {}{}",HASH_TAG , hashtags).as_str())?;
+        }
 
         Ok(())
     }

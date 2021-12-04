@@ -85,20 +85,20 @@ impl TaskList {
         self.prioritised_tasks = prioritised_tasks_from_vec_tasks(&self.tasks)
     }
 
-    // pub fn to_file(self, path: &str) -> Result<(), io::Error> {
-    //     let mut todofile;
-    //     match fs::File::open(path) {
-    //         Ok(file) => todofile = file,
-    //         Err(error) => {
-    //             // dealing with this error if we can create the file path we will
-    //             // and continue
-    //             match error.kind() {
-    //                 io::ErrorKind::NotFound => todofile = fs::File::create(path)?,
-    //                 _ => return Err(error),
-    //             }
-    //         }
-    //     }
-    // }
+    pub fn save(self, path: &str) -> Result<(), io::Error> {
+        let mut todofile;
+        match fs::File::open(path) {
+            Ok(file) => {todofile = file;},
+            Err(error) => {
+                // dealing with this error if we can create the file path we will
+                // and continue
+                match error.kind() {
+                    io::ErrorKind::NotFound => {todofile = fs::File::create(path)?;},
+                    _ => {return Err(error);},
+                }
+            }
+        }
+    }
 }
 
 impl std::str::FromStr for TaskList {
