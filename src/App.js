@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 // basic React
 // https://www.youtube.com/watch?v=dGcsHMXbSOA&ab_channel=DevEd
@@ -31,16 +31,18 @@ import { invoke } from "@tauri-apps/api/tauri";
 function App() {
   // Theme toggling
   const [theme, themeToggler, mountedComponent] = useDarkMode();
+  const [show, setShow] = useState(false)
   const loaded_todos = invoke("get_all_loaded_todo");
   if (!mountedComponent) return <div />;
 
   return (
     <div className={`App ${theme}`}>
-      <div className='Row'>
+      <button onClick={() => setShow(true)}>ShowModal</button>
+      <NewToDoModal show={show} onClose={() => setShow(false)}/>
+      {/* <div className='Row'>
         <Sidebar theme={theme} toggleTheme={themeToggler} />
-        <NewToDoModal />
         <Taskview taskList={loaded_todos} />
-      </div>
+      </div> */}
     </div>
   );
 }
