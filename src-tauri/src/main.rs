@@ -59,8 +59,11 @@ fn get_all_loaded_todo(state: tauri::State<AppState>) -> HashMap<String, todo_li
     .loaded_todo_lists
     .lock()
     .expect("Who is the othe user?");
-  println!("{:?}", locked_loaded_todo_lists);
-  locked_loaded_todo_lists.clone()
+  // println!("{:?}", locked_loaded_todo_lists);
+  let cln = locked_loaded_todo_lists.clone();
+  println!("{:?}", cln);
+  // looks like input changes to front end only so perhaps related to serialisation, not backend
+  cln
 }
 
 
@@ -83,11 +86,12 @@ fn get_todo(state: tauri::State<AppState>, source: String) -> todo_lib::TaskList
 }
 
 #[tauri::command]
-fn recieve_task(state: tauri::State<AppState>, new_task: todo_lib::Task, source: String) {
+fn recieve_task(state: tauri::State<AppState>, new_task: todo_lib::Task, source: String, hash: u64) {
   let mut locked_loaded_todo_lists = state
   .loaded_todo_lists
   .lock()
   .expect("Who is the othe user?");
+  println!("{}", hash);
 
   // let mut identified_taskList = locked_loaded_todo_lists[&source];
   if let Some(identified_task_list) = locked_loaded_todo_lists.get_mut(&source) {
@@ -97,6 +101,7 @@ fn recieve_task(state: tauri::State<AppState>, new_task: todo_lib::Task, source:
     // TODO: What should happen here?
     println!("could not get mutable version of the TaskList Prio hash")
   }
+  println!("Recieve Task Finish")
   
 }
 

@@ -7,6 +7,7 @@ use std::{
     collections::{hash_map::DefaultHasher, HashMap},
     str::FromStr,
 };
+use serde_json;
 
 #[test]
 fn test_generate_task_from_str() {
@@ -126,4 +127,35 @@ fn test_save_task_list() {
     let task_list = TaskList::from_file(&"../testFiles/todo.txt".to_owned()).unwrap();
     println!("{}", task_list);
     task_list.save().unwrap();
+}
+
+#[test]
+fn test_task_serialise() {
+    // Create a simple task
+    // missing most attributes
+    let input = "Task with no extra description";
+    let mut def_hasher = DefaultHasher::new();
+    input.to_owned().hash(&mut def_hasher);
+    let expected = Task {
+        subject: String::from("Task with no extra description"),
+        priority: 26,
+        created_by: None,
+        assigned_to: None,
+        create_date: None,
+        finish_date: None,
+        finished: false,
+        // threshold_date: Date::from_ymd_opt(2021, 11, 26),
+        due_date: None,
+        recurrence: None,
+        contexts: vec![],
+        projects: vec![],
+        hashtags: vec![],
+        input_hash: Some(def_hasher.finish()),
+        // tags: HashMap::new(),
+    };
+
+    // serialise that task
+    println!("{:?}", expected.input_hash);
+    println!("{:?}", serde_json::to_string_pretty(&expected));
+    panic!()
 }

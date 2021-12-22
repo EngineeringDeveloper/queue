@@ -27,6 +27,7 @@ function genTaskListComponents(taskList_objects) {
           priority < 26 ? (priority + 10).toString(36).toUpperCase() : "None";
         
         let tasks = taskList_slice.map((content, index) => {
+          console.log(content.input_hash)
           return (
             <Task task={content} source={source}></Task>
             )
@@ -75,6 +76,9 @@ class Taskview extends Component {
     // If the component mounted then we evaluate if the promise resolved
     this.state.taskList
       .then((list) => {
+        console.log("list")
+        console.log(list)
+        console.log("list")
         this.setState({ taskList: genTaskListComponents(list) });
       })
       .finally(() => {
@@ -87,9 +91,9 @@ class Taskview extends Component {
     let LoadedTasks;
     if (this.state.loading) {
       LoadedTasks = (
-        <box id='icon'>
+        <div id='icon'>
           <CircularProgress color='inherit' />
-        </box>
+        </div>
       );
     } else {
       LoadedTasks = this.state.taskList;

@@ -6,6 +6,7 @@ use crate::Date;
 use serde::{Deserialize, Serialize};
 use std::hash::{Hash, Hasher};
 use std::collections::hash_map::DefaultHasher;
+use rand;
 struct Priority;
 
 impl Priority {
@@ -64,7 +65,8 @@ impl Task {
         let mut task = Task::default();
         // Create the hash of the input
         let mut def_hasher = DefaultHasher::new();
-        input_string.hash(&mut def_hasher);
+        let salt: char = rand::random(); // random char to make sure the hash of each task is unique, even if the input is identical=
+        format!("{}{}", input_string , salt).hash(&mut def_hasher);
         task.input_hash = Some(def_hasher.finish());
 
         let mut working_string = input_string.to_owned();

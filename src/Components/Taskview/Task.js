@@ -10,7 +10,7 @@ export default function Task(props) {
   const handleChange = () => {
     console.log(props)
     props.task.finished = !checked
-    invoke("recieve_task", {newTask: props.task, source: props.source})
+    invoke("recieve_task", {newTask: props.task, source: props.source, hash: props.task.input_hash})
     setChecked(!checked)
   }
   return (
