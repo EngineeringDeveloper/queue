@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { CSSTransition } from "react-transition-group";
+import ReactDOM from "react-dom"
 import "./modal.css";
 
 export default function NewToDoModal(props) {
@@ -19,7 +20,7 @@ export default function NewToDoModal(props) {
   //     return null
   // }
 
-  return (
+  return ReactDOM.createPortal(
     <CSSTransition
       in={props.show}
       unmountOnExit
@@ -44,6 +45,7 @@ export default function NewToDoModal(props) {
           </div>
         </div>
       </div>
-    </CSSTransition>
+    </CSSTransition>,
+    document.getElementById('root')
   );
 }
