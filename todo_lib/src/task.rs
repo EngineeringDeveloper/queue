@@ -34,7 +34,7 @@ pub struct Task {
     pub contexts: Vec<String>,
     pub projects: Vec<String>,
     pub hashtags: Vec<String>,
-    pub input_hash: Option<u64>,
+    pub input_hash: Option<String>,
     // pub tags: HashMap<String, String>,
 }
 
@@ -67,7 +67,7 @@ impl Task {
         let mut def_hasher = DefaultHasher::new();
         let salt: char = rand::random(); // random char to make sure the hash of each task is unique, even if the input is identical=
         format!("{}{}", input_string , salt).hash(&mut def_hasher);
-        task.input_hash = Some(def_hasher.finish());
+        task.input_hash = Some(format!("{:x}", def_hasher.finish()));
 
         let mut working_string = input_string.to_owned();
 

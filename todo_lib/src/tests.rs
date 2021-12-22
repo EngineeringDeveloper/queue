@@ -157,5 +157,5 @@ fn test_task_serialise() {
     // serialise that task
     println!("{:?}", expected.input_hash);
     println!("{:?}", serde_json::to_string_pretty(&expected));
-    panic!()
+    // assert it happened correctly
 }

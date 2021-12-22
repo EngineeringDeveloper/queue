@@ -54,22 +54,6 @@ impl TaskList {
         let mut contents = String::new();
         todofile.read_to_string(&mut contents)?;
         let tasks = vec_tasks_from_str(&contents);
-        for tasklst in prioritised_tasks_from_vec_tasks(&tasks).into_values() {
-            for ptask in tasklst {
-                let mut found = false;
-                for task in tasks.iter() {
-                    if task.input_hash.unwrap() == ptask.input_hash.unwrap() {
-                        println!(" {} \t Match", ptask.input_hash.unwrap());
-                        found = true;
-                        break
-                    }
-                }
-                if !found {
-                    println!("{} \t No Match ", ptask.input_hash.unwrap());
-                }
-
-            }
-        }
         let prioritised_tasks = prioritised_tasks_from_vec_tasks(&tasks);
 
         Ok(TaskList {
@@ -77,24 +61,17 @@ impl TaskList {
             tasks,
             prioritised_tasks,
         })
-        // Ok(TaskList::from_str(&contents).expect("from Str should always return Ok"))
     }
 
     pub fn change_task(&mut self, new_task: Task) {
         // takes in the new task and uses its identifier to change the stored value
         // change the task in the taskvec and hash
-        // TODO: The hash is not being identified correctly
-        println!("new Task {}", new_task.input_hash.expect("have to have a hash"));
-        for task in self.tasks.iter() {
-            println!("ext Task {}", task.input_hash.expect("have to have a hash"))
-        }
-        // self.tasks.iter().map(|x| println!("All tasks{}", x.input_hash.expect("have to have a hash")));
         if let Some(task_index) = self.tasks.iter().position(|val| {val.input_hash == new_task.input_hash}) {
-            println!("found");
+            println!("task found");
             self.tasks.remove(task_index);
             self.tasks.push(new_task);
         } else {
-            println!("not found");
+            println!("task not found");
             self.add_task(new_task);
             // not sure this is the desired behavior
             // when the task is not already in the list it is added
