@@ -23,7 +23,8 @@
 }
 
 .modal-content {
-  width: 70%;
+  width: 75%;
+  opacity: 1;
   background-color: var(--theme-foreground);
   transition: all 0.3s ease-in-out;
   transform: translateY(50%);

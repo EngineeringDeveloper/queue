@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 // basic React
 // https://www.youtube.com/watch?v=dGcsHMXbSOA&ab_channel=DevEd
@@ -19,7 +19,6 @@ import "./App.css";
 // Custom Components
 import Sidebar from "./Components/Sidebar/Sidebar";
 import Taskview from "./Components/Taskview/Taskview";
-import NewToDoModal from "./Components/NewToDoModal/NewToDoModal";
 // import { GlobalStyles } from '@mui/styled-engine';
 
 // Tauri Commands
@@ -31,18 +30,15 @@ import { invoke } from "@tauri-apps/api/tauri";
 function App() {
   // Theme toggling
   const [theme, themeToggler, mountedComponent] = useDarkMode();
-  const [show, setShow] = useState(false)
   const loaded_todos = invoke("get_all_loaded_todo");
   if (!mountedComponent) return <div />;
 
   return (
-    <div className={`App ${theme}`}>
-      <button onClick={() => setShow(true)}>ShowModal</button>
-      <NewToDoModal show={show} onClose={() => setShow(false)}/>
-      {/* <div className='Row'>
+    <div className={`App ${theme}`} id='app'>
+      <div className='Row'>
         <Sidebar theme={theme} toggleTheme={themeToggler} />
         <Taskview taskList={loaded_todos} />
-      </div> */}
+      </div>
     </div>
   );
 }

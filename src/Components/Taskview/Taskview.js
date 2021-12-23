@@ -1,63 +1,60 @@
 import React, { Component } from "react";
 import Task from "./Task.js";
 import Tabs from "../Tabs.js";
+import NewToDoModal from "../Modal/NewToDoModal.js";
 import "./Taskview.css";
 import SearchIcon from "@mui/icons-material/Search";
 import CircularProgress from "@mui/material/CircularProgress";
 // https://mui.com/components/progress/
-import { invoke } from "@tauri-apps/api/tauri";
+// import { invoke } from "@tauri-apps/api/tauri";
 
-function genTaskListComponents(taskList_objects) {
-  console.log(taskList_objects)
+function genTaskListComponents(taskList_objects, setModal) {
   let outputArray = [];
   for (let taskList in taskList_objects) {
     taskList = taskList_objects[taskList];
-    
+
     let taskVec = taskList.tasks;
     let source = taskList.source;
     let priority_sort = taskList.prioritised_tasks;
 
     let todo_list = [];
-    if (typeof taskVec !== 'undefined' | taskVec.length !== 0) {
-      
+    if ((typeof taskVec !== "undefined") | (taskVec.length !== 0)) {
       for (let priority in priority_sort) {
-        let taskList_slice = priority_sort[priority]
+        let taskList_slice = priority_sort[priority];
         priority = parseInt(priority);
         let priorityLetter =
           priority < 26 ? (priority + 10).toString(36).toUpperCase() : "None";
-        
+
         let tasks = taskList_slice.map((content, index) => {
-          console.log(content.input_hash)
           return (
-            <Task task={content} source={source}></Task>
-            )
-        })
+            <Task
+              task={content}
+              source={source}
+              edit={setModal}
+              key={index}
+            ></Task>
+          );
+        });
         todo_list.push(
           <li className={`Priority ${priorityLetter}`} key={priority}>
             <div id='title'>{priorityLetter}</div>
-              <ul>
-                {tasks}
-              </ul>
+            <ul>{tasks}</ul>
           </li>
         );
       }
     } else {
-      console.log(typeof taskVec, taskVec.length)
-      todo_list = (<div/>)
+      todo_list = <div />;
     }
 
     outputArray.push(
       <div label={source}>
-        <ul>
-        {todo_list}
-        </ul>
+        <ul>{todo_list}</ul>
       </div>
     );
     // outputArray.push(subArray);
     // }
   }
 
-  // console.log(outputArray);
   return <Tabs>{outputArray}</Tabs>;
 }
 
@@ -65,10 +62,14 @@ class Taskview extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      input: "",
       taskList: props.taskList,
       error: null,
       loading: true,
+      showModal: false,
+      modalTask: null,
+      setShow: function (bool) {
+        this.setState({ show: bool });
+      },
     };
   }
 
@@ -76,10 +77,10 @@ class Taskview extends Component {
     // If the component mounted then we evaluate if the promise resolved
     this.state.taskList
       .then((list) => {
-        console.log("list")
-        console.log(list)
-        console.log("list")
-        this.setState({ taskList: genTaskListComponents(list) });
+        const setModalTask = (task) => {
+          this.setState({ modalTask: task, showModal: true });
+        };
+        this.setState({ taskList: genTaskListComponents(list, setModalTask) });
       })
       .finally(() => {
         this.setState({ loading: false });
@@ -101,8 +102,19 @@ class Taskview extends Component {
 
     return (
       <div className='Taskview'>
+        <NewToDoModal
+          show={this.state.showModal}
+          task={this.state.modalTask}
+          onClose={() => {
+            this.setState({ showModal: false , modalTask: null});
+          }}
+        />
         <header className='Header'>
           <SearchIcon />
+          <button onClick={() => this.setState({ showModal: true })}>
+            ShowModal
+          </button>
+
           <input
             className='TaskviewSearch'
             type='search'

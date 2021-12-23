@@ -24,34 +24,40 @@ div:empty { display: none }
 
 .Subject{
     float: left;
+    cursor: pointer;
 }
 
 .Project {
     background-color: var(--project);
     float: left;
     margin: 10px;
+    cursor: pointer;
 }
 
 .Context {
     background-color: var(--context);
     float: left;
     margin: 10px;
+    cursor: pointer;
 }
 
 .Hashtag {
     background-color: var(--hashtag);
     float: left;
     margin: 10px;
+    cursor: pointer;
 }
 
 .Tag {
     background-color: var(--tag);
     float: left;
     margin: 10px;
+    cursor: pointer;
 }
 
 .Dates {
     display: flex;
     flex-flow: row;
     /* margin-left: auto; */
+    cursor: pointer;
 }

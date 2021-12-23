@@ -30,6 +30,6 @@
 2021-11-08 language
 x 2021-11-23 2021-11-23 Some
 x 2021-11-23 2021-11-23 are Completed with @context +Project
+(C) 2021-11-23 other priorty with @context +Project
 (A) 2021-11-23 Priority @context @othercont +multiplePriortiy +priority #hashtag
 (B) 2021-11-23 next priority
-(C) 2021-11-23 other priorty with @context +Project

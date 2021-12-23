@@ -8,15 +8,17 @@ import { invoke } from '@tauri-apps/api/tauri'
 export default function Task(props) {
   const [checked, setChecked] = useState(props.task.finished);
   const handleChange = () => {
-    console.log(props)
     props.task.finished = !checked
     invoke("recieve_task", {newTask: props.task, source: props.source})
     setChecked(!checked)
   }
+  // const editTask = props.edit(props.task)
+
+
   return (
-    <div  className={'Task ' + checked}>
+    <div  className={'Task ' + checked}  onClick={() => props.edit(props.task)}>
       <Checkbox checked={checked} onChange={handleChange}></Checkbox>
-      <div style={{ padding: 0, display: "flex", flexFlow: "column" }}>
+      <div style={{ padding: 0, display: "flex", flexFlow: "column" }} >
         <Subject subject={props.task.subject} />
         <div style={{ padding: 0, display: "flex", flexFlow: "row" }}>
           <Boxed array={props.task.projects} cssClass='Project' />
