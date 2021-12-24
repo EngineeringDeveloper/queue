@@ -5,12 +5,15 @@ import TuneIcon from '@mui/icons-material/Tune';
 import SettingsIcon from '@mui/icons-material/Settings';
 import HelpCenterIcon from '@mui/icons-material/HelpCenter';
 import EmojiEmotionsIcon from '@mui/icons-material/EmojiEmotions';
+import logo from '../../icons/32x32.png';
+
 
 // https://mui.com/components/material-icons/
 export const SidebarDataIcon  = [
     {
         // title:"Queue",
-        icon: <EmojiEmotionsIcon />,
+        // icon: <EmojiEmotionsIcon />,
+        icon: <img src={logo} alt='failed'/>,
         link: "/",
     },
 ]
