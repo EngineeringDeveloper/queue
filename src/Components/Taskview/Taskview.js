@@ -48,7 +48,7 @@ function genTaskListComponents(taskList_objects, setModal) {
 
     outputArray.push(
       <div label={source}>
-        <ul>{todo_list}</ul>
+        <ul className="noList" >{todo_list}</ul>
       </div>
     );
     // outputArray.push(subArray);

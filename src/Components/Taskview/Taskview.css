@@ -14,12 +14,17 @@
   /* height: 100%; */
   width: 100%;
   display: flex;
-  justify-content: left;
+  /* justify-content: center; */
   flex-flow: column;
   overflow-y: auto;
   overflow-x: hidden;
   padding-bottom: 20px;
   padding-inline-start: 0px
+}
+
+.noList {
+  list-style: none;
+  padding-left: 0;
 }
 
 .Header {

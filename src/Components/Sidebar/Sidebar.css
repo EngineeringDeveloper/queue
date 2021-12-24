@@ -5,7 +5,7 @@
   position: relative;
   top: 0;
   display: flex;
-  width: 120px;
+  width: 100px;
   flex-flow: column;
   background: var(--theme-margin);
   /* border: var(--theme-foreground); */
