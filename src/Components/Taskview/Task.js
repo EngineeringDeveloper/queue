@@ -1,5 +1,8 @@
 import { React, useState} from "react";
 import Checkbox from "@mui/material/Checkbox";
+import Boxed from "./TaskComponents/Boxed.js"
+import Date from "./TaskComponents/Date.js"
+import Subject from "./TaskComponents/Subject.js"
 import "./Task.css";
 
 import { invoke } from '@tauri-apps/api/tauri'
@@ -26,31 +29,12 @@ export default function Task(props) {
           <Boxed array = {props.task.hashtags} cssClass="Hashtag"/>
           {/* <Boxed array = {props.task.tags} cssClass="Tag"/> */}
         </div>
-        <div className='Dates'>
-          <div>{"date :" + props.task.create_date}</div>
-          <div>{"date_f :" + props.task.finish_date}</div>
-          {/* <div>{"fin :" + props.task.finished}</div> */}
-          <div>{"due :" + props.task.due_date}</div>
-        </div>
+        <Date task ={props.task}></Date>
       </div>
     </div>
   );
 }
 
-const Subject = ({ subject }) => {
-  return <div className='Subject'>{subject}</div>;
-};
 
-const Boxed = ({ array, cssClass }) => {
-  if (array.length > 0) {
-    let list = array.map((value, key) => {
-      return (
-        <div className={cssClass + " Boxed"} key={key}>
-          {value}
-        </div>
-      );
-    });
-    return <div style={{ display: "flex" }}>{list}</div>;
-  }
-  return null;
-};
+
+

@@ -14,7 +14,7 @@ import { useDarkMode } from "./Components/ThemeToggle/useDarkMode";
 // import { ThemeProvider } from 'styled-components';
 // https://medium.com/swlh/setting-up-light-and-dark-mode-in-a-react-application-just-with-styles-7790dea22aed
 import "./styles/theme.css";
-import "./App.css";
+import "./styles/App.css";
 
 // Custom Components
 import Sidebar from "./Components/Sidebar/Sidebar";

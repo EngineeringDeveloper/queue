@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Task from "./Task.js";
-import Tabs from "../Tabs.js";
+import Tabs from "../Tab/Tabs.js";
 import NewToDoModal from "../Modal/NewToDoModal.js";
 import "./Taskview.css";
 import SearchIcon from "@mui/icons-material/Search";

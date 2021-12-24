@@ -1,0 +1,33 @@
+.Boxed {
+    padding: 5px;
+    border-radius: 5px;
+    list-style-type: none;
+}
+
+.Project {
+    background-color: var(--project);
+    float: left;
+    margin: 10px;
+    cursor: pointer;
+}
+
+.Context {
+    background-color: var(--context);
+    float: left;
+    margin: 10px;
+    cursor: pointer;
+}
+
+.Hashtag {
+    background-color: var(--hashtag);
+    float: left;
+    margin: 10px;
+    cursor: pointer;
+}
+
+.Tag {
+    background-color: var(--tag);
+    float: left;
+    margin: 10px;
+    cursor: pointer;
+}
