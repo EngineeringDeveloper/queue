@@ -4,7 +4,7 @@
   top: 0;
   right: 0;
   bottom: 0;
-  background-color: var(--theme-dimmed);
+  background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -23,11 +23,10 @@
 }
 
 .modal-content {
-  width: 75%;
-  opacity: 1;
+  width: 500px;
   background-color: var(--theme-foreground);
   transition: all 0.3s ease-in-out;
-  transform: translateY(50%);
+  transform: translateY(-200px);
 }
 
 .modal.enter-done .modal-content {
@@ -35,7 +34,7 @@
 }
 
 .modal.exit .modal-content {
-  transform: translateY(50%);
+  transform: translateY(-200px);
 }
 
 .modal-header,
@@ -49,6 +48,6 @@
 
 .modal-body {
   padding: 10px;
-  border-top: 1px solid var(--theme-background);
-  border-bottom: 1px solid var(--theme-background);
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
 }

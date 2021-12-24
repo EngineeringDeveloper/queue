@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { CSSTransition } from "react-transition-group";
 import ReactDOM from "react-dom";
-import "./modal.css";
+import "./Modal.css";
 
 export default function NewToDoModal(props) {
   useEffect(() => {
