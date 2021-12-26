@@ -19,11 +19,11 @@ export default function Task(props) {
 
 
   return (
-    <div  className={'Task ' + checked}  onClick={() => props.edit(props.task)}>
+    <div  className={'Task ' + checked} >
       <Checkbox checked={checked} onChange={handleChange}></Checkbox>
       <div style={{ padding: 0, display: "flex", flexFlow: "column" }} >
-        <Subject subject={props.task.subject} />
-        <div style={{ padding: 0, display: "flex", flexFlow: "row" }}>
+        <Subject subject={props.task.subject} onClick={() => props.edit(props.task)}/>
+        <div style={{ padding: 0, display: "flex", flexFlow: "row"}}>
           <Boxed array={props.task.projects} cssClass='Project' />
           <Boxed array={props.task.contexts} cssClass='Context' />
           <Boxed array = {props.task.hashtags} cssClass="Hashtag"/>

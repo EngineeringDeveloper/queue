@@ -15,11 +15,3 @@
 
 
 div:empty { display: none }
-
-
-.Dates {
-    display: flex;
-    flex-flow: row;
-    /* margin-left: auto; */
-    cursor: pointer;
-}
