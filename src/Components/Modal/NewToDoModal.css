@@ -1,0 +1,21 @@
+.content {
+  display: flex;
+  justify-content: center;
+  vertical-align: center;
+  width: 100%;
+}
+
+.textInput {
+  align-items: center;
+  box-sizing: border-box;
+  font-size: large;
+  display: inline-flex;
+  justify-content: flex-start;
+  width: 100%;
+  height: 50px;
+  background-color: var(--theme-foreground);
+  border-style: none;
+  font-family: sans-serif;
+  border-radius: 20px;
+  border: 4px solid var(--theme-margin);
+}
