@@ -1,6 +1,12 @@
 .Dates {
     display: flex;
     flex-flow: row;
-    justify-content:space-between;
+    justify-content:left;
     cursor: pointer;
+}
+
+#Dates > * {
+    display: block;
+    margin-right: 50px 0;
+    margin-left: 50px 0;
 }
